@@ -1,7 +1,7 @@
 ---
 title: "Transformasi Medan Elektromagnetik"
-subtitle: "Elektrodinamika Relativistik — J.D. Jackson (Bab 11)"
-author: "Kuliah Elektrodinamika"
+subtitle: "Formulasi Kovarian Elektrodinamika Relativistik — J.D. Jackson (Bab 11)"
+author: "Kuliah Elektrodinamika Pascasarjana"
 format:
   revealjs:
     theme: [default, custom.scss]
@@ -17,115 +17,122 @@ format:
     html-math-method: mathjax
 ---
 
-## Peta Alur Pembelajaran (From Scratch)
+## Kerangka Pembahasan
 
-::: {.incremental}
-1. **Krisis Elektrodinamika Klasik**: Mengapa Transformasi Galilei merusak invariansi persamaan gelombang Maxwell?
-2. **Solusi Einstein & Transformasi Lorentz**: Penurunan aljabar $x'$, $t'$, faktor $\gamma$, dan matriks boost $\Lambda^\alpha{}_\beta$.
-3. **Geometri Minkowski**: Ruang-waktu 4D, metrik $g_{\alpha\beta}$, 4-vektor, dan operator turunan $\partial_\alpha$.
-4. **Kovariansi Sumber, Potensial & Tera Lorenz**: Mengapa syarat $\partial_\alpha A^\alpha = 0$ mutlak diperlukan?
-5. **Penyatuan $\mathbf{E}$ & $\mathbf{B}$ dalam Tensor $F^{\alpha\beta}$ & $\tilde{F}^{\alpha\beta}$**: Mengapa butuh tensor rank-2 dan apa peran $F^{\alpha\beta}$ vs. $\tilde{F}^{\alpha\beta}$?
-6. **Transformasi Medan, Aplikasi Relativistik & Invarian Lorentz**: Muatan bergerak cepat, Presesi Thomas, & BMT.
+::: incremental
+1. **Krisis Elektrodinamika Klasik**: Mengapa Transformasi Galilei merusak kovariansi persamaan gelombang Maxwell?
+2. **Postulat Einstein & Transformasi Lorentz**: Penurunan aljabar $x'$, $t'$, faktor Lorentz $\gamma$, serta matriks *boost* $\Lambda^\alpha{}_\beta$.
+3. **Geometri Ruang-Waktu Minkowski**: Metrik $g_{\alpha\beta}$, aljabar 4-vektor, operator turunan $\partial_\alpha$, dan invariansi *d'Alembertian* $\square$.
+4. **Kovariansi Sumber, Potensial, dan Tera Lorenz**: Mengapa syarat $\partial_\alpha A^\alpha = 0$ esensial bagi pemisahan persamaan gelombang?
+5. **Unifikasi $\mathbf{E}$ dan $\mathbf{B}$ dalam Tensor $F^{\alpha\beta}$ dan $\tilde{F}^{\alpha\beta}$**: Argumen derajat kebebasan, konstruksi tensor, dan peran dualitas.
+6. **Transformasi Medan, Aplikasi Relativistik, dan Invarian Lorentz**: Muatan bergerak relativistik, Presesi Thomas, Persamaan BMT, serta besaran invarian.
 :::
 
 ## 1. Krisis Klasik: Kegagalan Transformasi Galilei
 
-::: {.box-blue}
-**Mekanika Newton (Invarian):** Di bawah Transformasi Galilei ($\mathbf{x}' = \mathbf{x} - \mathbf{v}t, \; t' = t$), percepatan tetap sama ($\ddot{\mathbf{x}}' = \ddot{\mathbf{x}}$), sehingga $m\frac{d^2\mathbf{x}}{dt^2} = \mathbf{F}$ mempertahankan bentuknya di semua kerangka inersia.
+::: box-blue
+**Mekanika Newton (Kovarian Galilei):** Di bawah Transformasi Galilei ($\mathbf{x}' = \mathbf{x} - \mathbf{v}t, \; t' = t$), percepatan bersifat invarian ($\ddot{\mathbf{x}}' = \ddot{\mathbf{x}}$), sehingga hukum kedua Newton $m\frac{d^2\mathbf{x}}{dt^2} = \mathbf{F}$ mempertahankan bentuknya di seluruh kerangka acuan inersial.
 :::
 
-::: {.fragment}
-**Persamaan Gelombang Elektromagnetik di Kerangka $K'$:**
+::: fragment
+**Persamaan Gelombang Elektromagnetik pada Kerangka $K'$:**
 
 $$\left( \nabla'^2 - \frac{1}{c^2}\frac{\partial^2}{\partial t'^2} \right) \psi = 0$$
 :::
 
-::: {.fragment}
-**Aturan Rantai (Chain Rule) dari Transformasi Galilei ($x'_i = x_i - v_i t, \; t' = t$):**
+::: fragment
+**Transformasi Operator Turunan (Aturan Rantai untuk $x'_i = x_i - v_i t, \; t' = t$):**
 
 $$\begin{aligned}
-\frac{\partial}{\partial x_i} &= \frac{\partial x'_j}{\partial x_i}\frac{\partial}{\partial x'_j} + \frac{\partial t'}{\partial x_i}\frac{\partial}{\partial t'} \implies \nabla = \nabla' \\
+\frac{\partial}{\partial x_i} &= \frac{\partial x'_j}{\partial x_i}\frac{\partial}{\partial x'_j} + \frac{\partial t'}{\partial x_i}\frac{\partial}{\partial t'} = \delta_{ij}\frac{\partial}{\partial x'_j} \implies \nabla = \nabla' \\
 \frac{\partial}{\partial t} &= \frac{\partial x'_j}{\partial t}\frac{\partial}{\partial x'_j} + \frac{\partial t'}{\partial t}\frac{\partial}{\partial t'} = -\mathbf{v}\cdot\nabla' + \frac{\partial}{\partial t'} \implies \frac{\partial}{\partial t'} = \frac{\partial}{\partial t} + \mathbf{v} \cdot \nabla
 \end{aligned}$$
 :::
 
 ## 1. Krisis Klasik: Munculnya Suku Konvektif
 
-Substitusi operator turunan kedua waktu $\frac{\partial^2}{\partial t'^2} = \left(\frac{\partial}{\partial t} + \mathbf{v} \cdot \nabla\right)^2$ ke persamaan gelombang menghasilkan:
+Untuk kecepatan relatif $\mathbf{v}$ yang konstan, operator turunan kedua terhadap waktu menjadi:
 
-::: {.fragment}
-::: {.box-red}
+$$\frac{\partial^2}{\partial t'^2} = \left(\frac{\partial}{\partial t} + \mathbf{v} \cdot \nabla\right)\left(\frac{\partial}{\partial t} + \mathbf{v} \cdot \nabla\right) = \frac{\partial^2}{\partial t^2} + 2(\mathbf{v}\cdot\nabla)\frac{\partial}{\partial t} + (\mathbf{v}\cdot\nabla)^2$$
+
+:::: fragment
+::: box-red
+**Persamaan Gelombang di Kerangka $K$ (Kehilangan Kovariansi):**
+
 $$\left[ \nabla^2 - \frac{1}{c^2}\frac{\partial^2}{\partial t^2} {\color{#dc2626}- \frac{2}{c^2}(\mathbf{v}\cdot\nabla)\frac{\partial}{\partial t} - \frac{1}{c^2}(\mathbf{v}\cdot\nabla)^2} \right] \psi = 0$$
 :::
-:::
+::::
 
-::: {.incremental}
-- **Kerusakan Invariansi:** Munculnya suku konvektif merah mengubah kecepatan rambat gelombang efektif bergantung pada arah dan laju pengamat $\mathbf{v}$.
-- **Implikasi Fisik:** Laju cahaya $c$ hanya bernilai tepat $c = 1/\sqrt{\mu_0\varepsilon_0}$ di satu kerangka acuan istimewa (*Kerangka Diam Eter*).
-- **Pilihan Einstein (1905):** Menolak konsep Eter, mempertahankan bentuk kovarian Persamaan Maxwell di semua kerangka inersia, dan mengganti Transformasi Galilei dengan **Transformasi Lorentz**.
+::: incremental
+- **Pelanggaran Invariansi:** Kehadiran suku konvektif (merah) mengubah laju rambat gelombang efektif menjadi bergantung pada arah serta kelajuan pengamat $\mathbf{v}$.
+- **Konsekuensi Paradigma Klasik:** Nilai $c = 1/\sqrt{\mu_0\varepsilon_0}$ hanya berlaku di satu kerangka acuan istimewa (*kerangka diam eter*), yang bertentangan dengan hasil eksperimen Michelson–Morley.
+- **Resolusi Einstein (1905):** Menanggalkan hipotesis eter, menegakkan prinsip relativitas bagi elektrodinamika Maxwell, dan mengganti Transformasi Galilei dengan **Transformasi Lorentz**.
 :::
 
 ## 2. Penurunan Transformasi Lorentz (1/2): Aljabar $x'$ dan $t'$
 
-**Landasan (Postulat 2):** Laju cahaya $c$ konstan di semua kerangka inersia, sehingga **Interval Ruang-Waktu ($s^2$)** harus invarian:
+**Landasan Postulat Kedua:** Laju rambat cahaya $c$ dalam ruang hampa bersifat invarian di seluruh kerangka acuan inersial, sehingga **interval ruang-waktu ($s^2$)** harus bernilai sama:
 
 $$s^2 = c^2 t^2 - x^2 - y^2 - z^2 = c^2 t'^2 - x'^2 - y'^2 - z'^2$$
 
-::: {.columns}
-::: {.column width="50%"}
-::: {.fragment}
-**Langkah 1: Bentuk Linier (Homogenitas & Isotropi)**
+::::::: columns
+:::: {.column width="50%"}
+::: fragment
+**Langkah 1: Bentuk Linear (Homogenitas & Isotropi)**
 
-Untuk boost sejajar sumbu-$x$ ($y'=y, \; z'=z$):
+Untuk *boost* sejajar sumbu-$x$ ($y'=y, \; z'=z$), simetri ruang-waktu menuntut hubungan linear:
 
 $$x' = \gamma(x - vt)$$
 
-Dengan prinsip relativitas ($v \to -v$):
+Berdasarkan prinsip relativitas ($v \to -v$):
 
 $$x = \gamma(x' + vt')$$
 :::
-:::
+::::
 
-::: {.column width="50%"}
-::: {.fragment}
-**Langkah 2: Mengisolasi $t'$**
+:::: {.column width="50%"}
+::: fragment
+**Langkah 2: Eliminasi untuk Memperoleh $t'$**
 
-Substitusikan $x'$ ke persamaan balik $x$:
+Substitusikan $x'$ ke dalam persamaan balik $x$:
 
 $$\begin{aligned}
 x &= \gamma\big[\gamma(x - vt) + vt'\big] \\
 \frac{x}{\gamma} &= \gamma x - \gamma v t + v t' \\
+v t' &= \gamma v t - x\left(\gamma - \frac{1}{\gamma}\right) \\
 t' &= \gamma \left[ t - \frac{x}{v}\left(1 - \frac{1}{\gamma^2}\right) \right]
 \end{aligned}$$
 :::
+::::
+:::::::
+
+## 2. Penurunan Transformasi Lorentz (2/2): Faktor $\gamma$ & Matriks *Boost*
+
+Substitusikan $x'$ dan $t'$ ke syarat invariansi $c^2 t'^2 - x'^2 = c^2 t^2 - x^2$, lalu samakan koefisien suku kuadratik $t^2$:
+
+::: fragment
+$$\gamma^2 c^2 t^2 - \gamma^2 v^2 t^2 = c^2 t^2 \implies \gamma^2\left(1 - \frac{v^2}{c^2}\right) = 1 \implies \gamma = \frac{1}{\sqrt{1 - \beta^2}} \quad \left(\beta \equiv \frac{v}{c}\right)$$
+
+Dengan identitas $1 - \frac{1}{\gamma^2} = \beta^2$, diperoleh $\frac{1}{v}\left(1 - \frac{1}{\gamma^2}\right) = \frac{v}{c^2}$, yang sekaligus menjamin kecocokan identik pada koefisien $xt$ dan $x^2$.
 :::
-:::
 
-## 2. Penentuan Faktor $\gamma$ & Matriks Lorentz Boost
-
-Substitusikan $x'$ dan $t'$ ke syarat invariansi $c^2 t'^2 - x'^2 = c^2 t^2 - x^2$ (dengan menyamakan koefisien $t^2$):
-
-::: {.fragment}
-$$\gamma^2 c^2 t^2 - \gamma^2 v^2 t^2 = c^2 t^2 \implies \gamma^2\left(1 - \frac{v^2}{c^2}\right) = 1 \implies \gamma = \frac{1}{\sqrt{1 - \beta^2}} \quad \left(\beta = \frac{v}{c}\right)$$
-:::
-
-::: {.columns}
-::: {.column width="52%"}
-::: {.fragment}
-::: {.box-green}
-**Transformasi Lorentz Baku** (karena $1 - \frac{1}{\gamma^2} = \beta^2$):
+:::::::: columns
+::::: {.column width="52%"}
+:::: fragment
+::: box-green
+**Transformasi Lorentz Baku:**
 
 $$\begin{aligned}
 ct' &= \gamma(ct - \beta x), & y' &= y \\
 x' &= \gamma(x - \beta ct), & z' &= z
 \end{aligned}$$
 :::
-:::
-:::
+::::
+:::::
 
-::: {.column width="48%"}
-::: {.fragment}
-**Bentuk Matriks ($x'^\alpha = \Lambda^\alpha{}_\beta x^\beta$):**
+:::: {.column width="48%"}
+:::: fragment
+**Representasi Matriks ($x'^\alpha = \Lambda^\alpha{}_\beta x^\beta$):**
 
 $$\Lambda^\alpha{}_\beta = \begin{pmatrix}
 \gamma & -\gamma\beta & 0 & 0 \\
@@ -133,27 +140,27 @@ $$\Lambda^\alpha{}_\beta = \begin{pmatrix}
 0 & 0 & 1 & 0 \\
 0 & 0 & 0 & 1
 \end{pmatrix}$$
-:::
-:::
-:::
+::::
+::::
+::::::::
 
 ## 3. Geometri Ruang-Waktu Minkowski & Metrik $g_{\alpha\beta}$
 
 Koordinat 4-vektor posisi kontravarian didefinisikan sebagai $x^\alpha = (x^0, x^1, x^2, x^3) = (ct, x, y, z)$.
 
-::: {.columns}
-::: {.column width="46%"}
-::: {.fragment}
+::::::: columns
+:::: {.column width="46%"}
+::: fragment
 **Tensor Metrik Minkowski:**
 
 $$g_{\alpha\beta} = g^{\alpha\beta} = \begin{pmatrix} 1 & 0 & 0 & 0 \\ 0 & -1 & 0 & 0 \\ 0 & 0 & -1 & 0 \\ 0 & 0 & 0 & -1 \end{pmatrix}$$
 
-Sifat ortogonalitas: $g_{\alpha\gamma} g^{\gamma\beta} = \delta_\alpha^\beta$.
+Sifat ortogonalitas metrik: $g_{\alpha\gamma} g^{\gamma\beta} = \delta_\alpha^\beta$.
 :::
-:::
+::::
 
-::: {.column width="54%"}
-::: {.fragment}
+:::: {.column width="54%"}
+::: fragment
 **Operasi Indeks & 4-Vektor Kinematika:**
 
 - **Interval Invarian:** $ds^2 = g_{\alpha\beta} dx^\alpha dx^\beta = c^2 d\tau^2$
@@ -161,188 +168,190 @@ Sifat ortogonalitas: $g_{\alpha\gamma} g^{\gamma\beta} = \delta_\alpha^\beta$.
 - **4-Kecepatan:** $U^\alpha = \frac{dx^\alpha}{d\tau} = \gamma_u (c, \mathbf{u})$
 - **4-Momentum:** $p^\alpha = m U^\alpha = \left(\frac{E}{c}, \mathbf{p}\right)$
 :::
-:::
-:::
+::::
+:::::::
 
-::: {.fragment}
-::: {.box-blue}
-**Syarat Invariansi Transformasi Lorentz:** $\Lambda^\mu{}_\alpha \, g_{\mu\nu} \, \Lambda^\nu{}_\beta = g_{\alpha\beta} \implies \text{Produk dalam } A_\alpha B^\alpha \text{ invarian!}$
+:::: fragment
+::: box-blue
+**Syarat Ortogonalitas Transformasi Lorentz:** Invariansi interval $ds^2$ menuntut $\Lambda^\mu{}_\alpha \, g_{\mu\nu} \, \Lambda^\nu{}_\beta = g_{\alpha\beta}$, sehingga setiap produk skalar $A'_\alpha B'^\alpha = g_{\mu\nu} \Lambda^\mu{}_\alpha \Lambda^\nu{}_\beta A^\alpha B^\beta = A_\alpha B^\alpha$ bersifat **invarian Lorentz**.
 :::
-:::
+::::
 
-## 3. Operator Turunan 4-Dimensi & Invariansi d'Alembertian
+## 3. Operator Turunan 4-Dimensi & Invariansi *d'Alembertian*
 
-Dengan aturan rantai $\partial_\alpha = \frac{\partial}{\partial x^\alpha}$, operator turunan 4-dimensi terbagi menjadi bentuk kovarian dan kontravarian:
+Berdasarkan aturan rantai pada transformasi koordinat invers $x^\beta = (\Lambda^{-1})^\beta{}_\alpha x'^\alpha$, operator turunan $\partial_\alpha \equiv \frac{\partial}{\partial x^\alpha}$ bertransformasi secara **kovarian** dan terbagi menjadi dua bentuk:
 
-::: {.fragment}
+::: fragment
 $$\partial_\alpha \equiv \frac{\partial}{\partial x^\alpha} = \left(\frac{1}{c}\frac{\partial}{\partial t}, \, \nabla\right), \qquad \partial^\alpha \equiv g^{\alpha\beta}\partial_\beta = \left(\frac{1}{c}\frac{\partial}{\partial t}, \, -\nabla\right)$$
 :::
 
-::: {.fragment}
-::: {.box-green}
-**Operator d'Alembertian ($\square$) sebagai Skalar Lorentz:**
+:::: fragment
+::: box-green
+**Operator *d'Alembertian* ($\square$) sebagai Skalar Lorentz:**
 
-$$\square \equiv \partial_\alpha \partial^\alpha = \left(\frac{1}{c}\frac{\partial}{\partial t}\right)^2 - \nabla\cdot\nabla = \frac{1}{c^2}\frac{\partial^2}{\partial t^2} - \nabla^2$$
+$$\square \equiv \partial_\alpha \partial^\alpha = g^{\alpha\beta}\partial_\alpha \partial_\beta = \left(\frac{1}{c}\frac{\partial}{\partial t}\right)^2 - \nabla\cdot\nabla = \frac{1}{c^2}\frac{\partial^2}{\partial t^2} - \nabla^2$$
 
-Karena $\square$ merupakan kontraksi penuh dua 4-vektor, maka $\square' = \square$ di semua kerangka inersia—persamaan gelombang Maxwell otomatis invarian di bawah Transformasi Lorentz!
+Karena $\square$ merupakan kontraksi penuh antara 4-vektor kovarian dan kontravarian, maka $\square' = \square$ di seluruh kerangka acuan inersial. Dengan demikian, persamaan gelombang elektromagnetik secara alami bersifat invarian di bawah Transformasi Lorentz.
 :::
-:::
+::::
 
 ## 4. Kovariansi Sumber ($J^\alpha$) & Masalah Potensial ($A^\alpha$)
 
-::: {.columns}
-::: {.column width="44%"}
-::: {.fragment}
+::::::: columns
+:::: {.column width="45%"}
+::: fragment
 **A. 4-Vektor Rapat Arus ($J^\alpha$)**
 
-Karena muatan $\delta q = \rho d^3x$ invarian, $\rho$ dan $\mathbf{J}$ menyatu menjadi $J^\alpha = (c\rho, \mathbf{J})$ dengan hukum kekekalan muatan:
+Karena muatan listrik $\delta q = \rho d^3x$ bersifat invarian, $\rho$ dan $\mathbf{J}$ menyatu menjadi $J^\alpha = (c\rho, \mathbf{J})$ dengan persamaan kontinuitas:
 
 $$\partial_\alpha J^\alpha = \frac{\partial \rho}{\partial t} + \nabla \cdot \mathbf{J} = 0$$
 :::
-:::
+::::
 
-::: {.column width="56%"}
-::: {.fragment}
-**B. Persamaan Maxwell dalam Potensial $A^\alpha = (\Phi, \mathbf{A})$**
+:::: {.column width="55%"}
+::: fragment
+**B. Persamaan Maxwell dalam Potensial ($A^\alpha$)**
 
-Substitusi $\mathbf{B} = \nabla \times \mathbf{A}$ dan $\mathbf{E} = -\nabla\Phi - \frac{1}{c}\frac{\partial \mathbf{A}}{\partial t}$ ke Hukum Gauss & Ampère-Maxwell menghasilkan:
+Substitusi $\mathbf{B} = \nabla \times \mathbf{A}$ dan $\mathbf{E} = -\nabla\Phi - \frac{1}{c}\frac{\partial \mathbf{A}}{\partial t}$ ke dalam Hukum Gauss dan Ampère–Maxwell (dengan identitas $\nabla\times(\nabla\times\mathbf{A}) = \nabla(\nabla\cdot\mathbf{A}) - \nabla^2\mathbf{A}$) menghasilkan:
 
 $$\begin{aligned}
 \nabla^2 \Phi + \frac{1}{c}\frac{\partial}{\partial t}(\nabla \cdot \mathbf{A}) &= -4\pi \rho \\
 \left(\nabla^2 - \frac{1}{c^2}\frac{\partial^2}{\partial t^2}\right)\mathbf{A} - \nabla\left(\nabla\cdot\mathbf{A} + \frac{1}{c}\frac{\partial \Phi}{\partial t}\right) &= -\frac{4\pi}{c}\mathbf{J}
 \end{aligned}$$
 :::
-:::
-:::
+::::
+:::::::
 
-::: {.fragment}
-::: {.box-red}
-**Dua Masalah yang Muncul:**
+:::: fragment
+::: box-red
+**Dua Permasalahan Matematis yang Muncul:**
 
-1. **Terkopel:** $\Phi$ dan $\mathbf{A}$ masih saling bercampur melalui suku $\nabla\cdot\mathbf{A} + \frac{1}{c}\frac{\partial \Phi}{\partial t}$ sehingga sulit diselesaikan.
-2. **Tidak Unik:** Medan $(\mathbf{E}, \mathbf{B})$ yang **sama** dapat dihasilkan oleh banyak $(\Phi, \mathbf{A})$ yang **berbeda** melalui transformasi $A'^\alpha = A^\alpha - \partial^\alpha \chi$ ($\Phi' = \Phi - \frac{1}{c}\partial_t\chi$, $\mathbf{A}' = \mathbf{A} + \nabla\chi$).
+1. **Persamaan Terkopel:** Potensial $\Phi$ dan $\mathbf{A}$ masih saling bergandeng melalui suku $\nabla\cdot\mathbf{A} + \frac{1}{c}\frac{\partial \Phi}{\partial t}$ sehingga menyulitkan solusi analitik.
+2. **Ketidakunikan (Invariansi Tera/*Gauge*):** Medan fisis $(\mathbf{E}, \mathbf{B})$ tetap tidak berubah di bawah transformasi tera $A'^\alpha = A^\alpha - \partial^\alpha \chi$ ($\Phi' = \Phi - \frac{1}{c}\partial_t\chi$, $\mathbf{A}' = \mathbf{A} + \nabla\chi$).
 :::
-:::
+::::
 
 ## 4. Solusi: Syarat Tera Lorenz ($\partial_\alpha A^\alpha = 0$)
 
-Karena pilihan fungsi $\chi$ tidak mengubah medan fisis $(\mathbf{E}, \mathbf{B})$, kita **memanfaatkan kebebasan tersebut** untuk memaksa suku pengganggu pada persamaan potensial menjadi nol:
+Mengingat fungsi skalar $\chi$ tidak mengubah medan fisis $(\mathbf{E}, \mathbf{B})$, kebebasan tera tersebut dapat dimanfaatkan untuk melenyapkan suku penggandeng pada persamaan potensial:
 
-::: {.fragment}
-::: {.box-green}
-**Syarat Tera Lorenz (dalam bentuk 4-vektor):**
+:::: fragment
+::: box-green
+**Dekoupling melalui Syarat Tera Lorenz:**
 
-$$\partial_\alpha A^\alpha = \frac{1}{c}\frac{\partial \Phi}{\partial t} + \nabla \cdot \mathbf{A} = 0 \implies \begin{cases} \square \Phi = 4\pi \rho \\ \square \mathbf{A} = \frac{4\pi}{c}\mathbf{J} \end{cases} \iff \square A^\alpha = \frac{4\pi}{c} J^\alpha$$
+$$\partial_\alpha A^\alpha = \frac{1}{c}\frac{\partial \Phi}{\partial t} + \nabla \cdot \mathbf{A} = 0 \implies \begin{cases} \left(\frac{1}{c^2}\partial_t^2 - \nabla^2\right)\Phi = 4\pi \rho \\ \left(\frac{1}{c^2}\partial_t^2 - \nabla^2\right)\mathbf{A} = \frac{4\pi}{c}\mathbf{J} \end{cases} \iff \square A^\alpha = \frac{4\pi}{c} J^\alpha$$
 :::
-:::
+::::
 
-::: {.columns}
-::: {.column width="54%"}
-::: {.fragment}
-::: {.box-blue}
+::::::::: columns
+::::: {.column width="54%"}
+:::: fragment
+::: box-blue
 **Keunggulan Syarat Tera Lorenz:**
 
-- **Langsung Terpisah:** $\Phi$ dan $\mathbf{A}$ terlepas menjadi satu persamaan gelombang kovarian $\square A^\alpha = \frac{4\pi}{c}J^\alpha$.
-- **Invarian Lorentz:** $\partial_\alpha A^\alpha = 0$ adalah **skalar Lorentz** (berlaku di semua kerangka), berbeda dengan Tera Coulomb ($\nabla\cdot\mathbf{A}=0$) yang bergantung kerangka acuan.
+- **Pemisahan Sempurna:** $\Phi$ dan $\mathbf{A}$ terurai menjadi satu persamaan gelombang non-homogen yang simetris dan kovarian: $\square A^\alpha = \frac{4\pi}{c}J^\alpha$.
+- **Invarian Lorentz:** $\partial_\alpha A^\alpha = 0$ merupakan **skalar Lorentz** (berlaku di semua kerangka inersial), berbeda dengan Tera Coulomb ($\nabla\cdot\mathbf{A}=0$) yang bergantung pada kerangka acuan.
 :::
-:::
-:::
+::::
+:::::
 
-::: {.column width="46%"}
-::: {.fragment}
-::: {.box-amber}
-**Selalu Dapat Dipenuhi:**
+::::: {.column width="46%"}
+:::: fragment
+::: box-amber
+**Jaminan Eksistensi Tera:**
 
-Jika $A^\alpha$ awal belum memenuhi $\partial_\alpha A^\alpha = 0$, cukup pilih $\chi$ yang memenuhi:
+Apabila $A^\alpha$ awal belum memenuhi $\partial_\alpha A^\alpha = 0$, selalu dapat dipilih fungsi $\chi$ yang memenuhi persamaan gelombang:
 
-$$\square \chi = \partial_\alpha A^\alpha \implies \partial_\alpha A'^\alpha = 0$$
+$$\square \chi = \partial_\alpha A^\alpha \implies \partial_\alpha A'^\alpha = \partial_\alpha A^\alpha - \square\chi = 0$$
 :::
-:::
-:::
-:::
+::::
+:::::
+:::::::::
 
-## 5. Bagaimana Penyatuan Medan $\mathbf{E}$ dan $\mathbf{B}$ Terjadi?
+## 5. Penyatuan Medan $\mathbf{E}$ dan $\mathbf{B}$ dalam Tensor $F^{\alpha\beta}$
 
-Mengapa $\mathbf{E}$ dan $\mathbf{B}$ tidak bisa menjadi dua 4-vektor terpisah, melainkan harus menyatu menjadi satu tensor?
+Mengapa medan listrik $\mathbf{E}$ dan medan magnetik $\mathbf{B}$ tidak dapat direpresentasikan sebagai dua 4-vektor terpisah, melainkan harus menyatu dalam satu tensor?
 
-::: {.columns}
-::: {.column width="50%"}
-::: {.fragment}
-::: {.box-blue}
-**1. Argumen Derajat Kebebasan (DOF):**
+::::::::: columns
+::::: {.column width="48%"}
+:::: fragment
+::: box-blue
+**1. Argumen Derajat Kebebasan:**
 
-- Sebuah 4-vektor di ruang-waktu 4D hanya memiliki **4 komponen** (seperti $x^\alpha, J^\alpha, A^\alpha$).
-- Medan elektromagnetik terdiri dari $\mathbf{E} = (E_x, E_y, E_z)$ dan $\mathbf{B} = (B_x, B_y, B_z)$, total **6 komponen bebas**.
-- **Solusi Matematis:** Tensor antisimetris orde-2 ($F^{\alpha\beta} = -F^{\beta\alpha}$) di 4D memiliki tepat $\binom{4}{2} = \mathbf{6}$ **komponen bebas**!
+- Suatu 4-vektor di ruang-waktu 4D hanya memiliki **4 komponen** (seperti $x^\alpha, J^\alpha, A^\alpha$).
+- Medan elektromagnetik tersusun atas $\mathbf{E} = (E_1, E_2, E_3)$ dan $\mathbf{B} = (B_1, B_2, B_3)$ dengan total **6 komponen bebas**.
+- **Struktur Matematis:** Tensor antisimetris orde-2 ($F^{\alpha\beta} = -F^{\beta\alpha}$) di ruang 4D memiliki tepat $\binom{4}{2} = \mathbf{6}$ **komponen independen**.
 :::
-:::
-:::
+::::
+:::::
 
-::: {.column width="50%"}
-::: {.fragment}
-::: {.box-green}
-**2. Mekanisme Penyatuan dari 4-Potensial:**
+::::: {.column width="52%"}
+:::: fragment
+::: box-green
+**2. Konstruksi Eksplisit dari 4-Potensial:**
 
 Mengambil turunan antisimetris dari $A^\alpha = (\Phi, \mathbf{A})$:
 
-$$F^{\alpha\beta} = \partial^\alpha A^\beta - \partial^\beta A^\alpha$$
+$$F^{\alpha\beta} \equiv \partial^\alpha A^\beta - \partial^\beta A^\alpha$$
 
-- **Komponen Ruang–Waktu ($F^{i0}$):** Menghasilkan medan listrik $E_i = -\partial_i \Phi - \frac{1}{c}\partial_t A_i$.
-- **Komponen Ruang–Ruang ($F^{ij}$):** Menghasilkan medan magnet $B_k = (\nabla \times \mathbf{A})_k = -\frac{1}{2}\epsilon_{ijk} F^{ij}$.
+- **Komponen Ruang–Waktu ($F^{i0}$):**
+  $$F^{i0} = \partial^i A^0 - \partial^0 A^i = -\frac{\partial \Phi}{\partial x_i} - \frac{1}{c}\frac{\partial A_i}{\partial t} = E_i$$
+- **Komponen Ruang–Ruang ($F^{ij}$):**
+  $$F^{ij} = -\frac{\partial A_j}{\partial x_i} + \frac{\partial A_i}{\partial x_j} = -\epsilon_{ijk}(\nabla \times \mathbf{A})_k = -\epsilon_{ijk} B_k$$
 :::
+::::
+:::::
+:::::::::
+
+::: fragment
+**Makna Fisis:** Di bawah Transformasi Lorentz (rotasi hiperbolik di ruang-waktu 4D), sumbu waktu dan ruang saling bercampur sehingga komponen $F^{i0}$ ($\mathbf{E}$) dan $F^{ij}$ ($\mathbf{B}$) bertransformasi satu sama lain sebagai proyeksi berbeda dari satu entitas fisis tunggal $F^{\alpha\beta}$.
 :::
-:::
-:::
 
-::: {.fragment}
-**Makna Fisik:** Di bawah rotasi 4D (Lorentz Boost), sumbu waktu dan ruang tercampur, sehingga komponen $F^{i0}$ ($\mathbf{E}$) dan $F^{ij}$ ($\mathbf{B}$) **saling bertukar peran**—keduanya adalah proyeksi berbeda dari satu objek fisis tunggal $F^{\alpha\beta}$.
-:::
+## 5. Matriks Tensor Medan ($F^{\alpha\beta}$) dan Tensor Dual ($\tilde{F}^{\alpha\beta}$)
 
-## 5. Tensor Kekuatan Medan ($F^{\alpha\beta}$ dan $\tilde{F}^{\alpha\beta}$)
+Dari hasil penjabaran komponen $F^{i0} = E_i$ dan $F^{ij} = -\epsilon_{ijk} B_k$, tersusun matriks antisimetris $4\times 4$ beserta tensor dualnya (dengan konvensi Levi-Civita $\epsilon^{0123} = +1$):
 
-Dari definisi $F^{\alpha\beta} = \partial^\alpha A^\beta - \partial^\beta A^\alpha$, kita susun matriks antisimetris $4\times 4$ beserta tensor dualnya:
+::::::::: columns
+::::: {.column width="50%"}
+:::: fragment
+**Tensor Medan Elektromagnetik ($F^{\alpha\beta}$):**
 
-::: {.columns}
-::: {.column width="50%"}
-::: {.fragment}
-**Tensor Medan Biasa ($F^{\alpha\beta}$):**
-
-::: {.small-math}
+::: small-math
 $$F^{\alpha\beta} = \begin{pmatrix} 0 & -E_x & -E_y & -E_z \\ E_x & 0 & -B_z & B_y \\ E_y & B_z & 0 & -B_x \\ E_z & -B_y & B_x & 0 \end{pmatrix}$$
 :::
 
-*(Bentuk kovarian $F_{\alpha\beta} = g_{\alpha\mu}g_{\beta\nu}F^{\mu\nu}$ membalik tanda $\mathbf{E} \to -\mathbf{E}$)*
-:::
-:::
+*(Bentuk kovarian $F_{\alpha\beta} = g_{\alpha\mu}g_{\beta\nu}F^{\mu\nu}$ membalik tanda komponen ruang–waktu: $\mathbf{E} \to -\mathbf{E}$)*
+::::
+:::::
 
-::: {.column width="50%"}
-::: {.fragment}
+::::: {.column width="50%"}
+:::: fragment
 **Tensor Dual ($\tilde{F}^{\alpha\beta} = \frac{1}{2}\epsilon^{\alpha\beta\gamma\delta}F_{\gamma\delta}$):**
 
-::: {.small-math}
+::: small-math
 $$\tilde{F}^{\alpha\beta} = \begin{pmatrix} 0 & -B_x & -B_y & -B_z \\ B_x & 0 & E_z & -E_y \\ B_y & -E_z & 0 & E_x \\ B_z & E_y & -E_x & 0 \end{pmatrix}$$
 :::
 
-*(Transformasi Dualitas: $\mathbf{E} \to \mathbf{B}, \; \mathbf{B} \to -\mathbf{E}$)*
-:::
-:::
-:::
+*(Mengikuti transformasi dualitas elektromagnetik: $\mathbf{E} \to \mathbf{B}, \; \mathbf{B} \to -\mathbf{E}$)*
+::::
+:::::
+:::::::::
 
-## 6. Mengapa Ada $F$ dan $\tilde{F}$? (1/2): Formulasi Hanya dengan $F$
+## 6. Mengapa Diperlukan $F^{\alpha\beta}$ dan $\tilde{F}^{\alpha\beta}$? (1/2): Identitas Bianchi
 
-Sebenarnya, **seluruh informasi** Persamaan Maxwell Homogen sudah terkandung di dalam $F_{\alpha\beta}$ saja tanpa perlu $\tilde{F}^{\alpha\beta}$ melalui **Identitas Bianchi (jumlah siklik 3 indeks)**:
+Secara prinsip, seluruh informasi Persamaan Maxwell Homogen telah terkandung di dalam $F_{\alpha\beta}$ saja tanpa melibatkan $\tilde{F}^{\alpha\beta}$ melalui **Identitas Bianchi (penjumlahan siklik tiga indeks)**:
 
-::: {.fragment}
+::: fragment
 $$\partial_\alpha F_{\beta\gamma} + \partial_\beta F_{\gamma\alpha} + \partial_\gamma F_{\alpha\beta} = 0 \qquad \left(\text{atau } \partial_{[\alpha} F_{\beta\gamma]} = 0\right)$$
 :::
 
-::: {.columns}
-::: {.column width="48%"}
-::: {.fragment}
-::: {.box-blue}
-**Bukti Identitas dari Potensial $A_\alpha$:**
+::::::::: columns
+::::: {.column width="48%"}
+:::: fragment
+::: box-blue
+**Pembuktian Identitas dari Potensial $A_\alpha$:**
 
-Substitusi $F_{\alpha\beta} = \partial_\alpha A_\beta - \partial_\beta A_\alpha$:
+Substitusi $F_{\alpha\beta} = \partial_\alpha A_\beta - \partial_\beta A_\alpha$ menghasilkan:
 
 $$\begin{aligned}
 &\partial_\alpha(\partial_\beta A_\gamma - \partial_\gamma A_\beta) \\
@@ -350,136 +359,147 @@ $$\begin{aligned}
 + &\partial_\gamma(\partial_\alpha A_\beta - \partial_\beta A_\alpha) \equiv 0
 \end{aligned}$$
 
-karena turunan parsial saling komutatif ($\partial_\alpha\partial_\beta = \partial_\beta\partial_\alpha$).
+Identitas ini terpenuhi secara otomatis akibat sifat komutatif turunan parsial ($\partial_\alpha\partial_\beta = \partial_\beta\partial_\alpha$).
 :::
-:::
-:::
+::::
+:::::
 
-::: {.column width="52%"}
-::: {.fragment}
-::: {.box-green}
+::::: {.column width="52%"}
+:::: fragment
+::: box-green
 **Ekstraksi Persamaan Maxwell Homogen:**
 
 - **Untuk $(\alpha,\beta,\gamma) = (1,2,3)$:**
   $$\partial_1 F_{23} + \partial_2 F_{31} + \partial_3 F_{12} = -\left(\frac{\partial B_x}{\partial x} + \frac{\partial B_y}{\partial y} + \frac{\partial B_z}{\partial z}\right) = 0$$
-  $\implies \nabla \cdot \mathbf{B} = 0$ *(Gauss Magnetik)*.
+  $\implies \nabla \cdot \mathbf{B} = 0$ *(Hukum Gauss Magnetik)*.
 - **Untuk $(\alpha,\beta,\gamma) = (0,1,2)$:**
   $$\partial_0 F_{12} + \partial_1 F_{20} + \partial_2 F_{01} = -\frac{1}{c}\frac{\partial B_z}{\partial t} - \frac{\partial E_y}{\partial x} + \frac{\partial E_x}{\partial y} = 0$$
-  $\implies \nabla \times \mathbf{E} + \frac{1}{c}\frac{\partial\mathbf{B}}{\partial t} = 0$ *(Hukum Faraday)*.
+  $\implies \nabla \times \mathbf{E} + \frac{1}{c}\frac{\partial\mathbf{B}}{\partial t} = 0$ *(Hukum Induksi Faraday)*.
 :::
-:::
-:::
-:::
+::::
+:::::
+:::::::::
 
-## 6. Mengapa Ada $F$ dan $\tilde{F}$? (2/2): Ekuivalensi & Alasan Praktis
+## 6. Mengapa Diperlukan $F^{\alpha\beta}$ dan $\tilde{F}^{\alpha\beta}$? (2/2): Ekuivalensi & Keunggulan
 
-Mengontraksikan identitas siklik $\partial_{[\alpha} F_{\beta\gamma]} = 0$ dengan tensor Levi-Civita 4D $\frac{1}{2}\epsilon^{\delta\alpha\beta\gamma}$ mereduksi 3 suku menjadi **1 suku divergensi**:
+Mengontraksikan identitas siklik $\partial_{[\alpha} F_{\beta\gamma]} = 0$ dengan tensor Levi-Civita 4D $\frac{1}{2}\epsilon^{\delta\alpha\beta\gamma}$ mereduksi tiga suku menjadi **satu suku divergensi**:
 
-::: {.fragment}
+::: fragment
 $$\frac{1}{2}\epsilon^{\delta\alpha\beta\gamma}\left(\partial_\alpha F_{\beta\gamma} + \partial_\beta F_{\gamma\alpha} + \partial_\gamma F_{\alpha\beta}\right) = 0 \iff \partial_\alpha \underbrace{\left(\frac{1}{2}\epsilon^{\alpha\delta\beta\gamma} F_{\beta\gamma}\right)}_{\tilde{F}^{\alpha\delta}} = 0 \implies \partial_\alpha \tilde{F}^{\alpha\beta} = 0$$
 :::
 
-::: {.fragment}
-::: {.box-amber}
-**Lalu mengapa $\tilde{F}^{\alpha\beta}$ tetap digunakan padahal secara prinsip $F^{\alpha\beta}$ saja sudah cukup?**
+:::: fragment
+::: box-amber
+**Signifikansi Penggunaan $\tilde{F}^{\alpha\beta}$ dalam Formulasi Kovarian:**
 
-1. **Simetri & Kerapian Notasi:** Mengubah persamaan tensor orde-3 bertiga suku ($\partial_{[\alpha}F_{\beta\gamma]}=0$) menjadi divergensi 4-vektor orde-1 yang simetris sempurna dengan persamaan inhomogen:
+1. **Simetri dan Kerapian Notasi:** Mengubah persamaan tensor orde-3 tiga suku ($\partial_{[\alpha}F_{\beta\gamma]}=0$) menjadi divergensi 4-vektor yang simetris sempurna dengan persamaan inhomogen:
    $$\partial_\alpha F^{\alpha\beta} = \frac{4\pi}{c}J^\beta \qquad \longleftrightarrow \qquad \partial_\alpha \tilde{F}^{\alpha\beta} = 0$$
-2. **Dualiti Elektromagnetik & Monopol Magnetik:** Memperlihatkan simetri pertukaran $\mathbf{E} \leftrightarrow \mathbf{B}$. Jika monopol magnet ($J_m^\beta$) eksis, persamaan homogen langsung menjadi $\partial_\alpha \tilde{F}^{\alpha\beta} = \frac{4\pi}{c}J_m^\beta$.
-3. **Konstruksi Invarian Pseudoskalar:** Memungkinkan penulisan invarian kedua $F_{\alpha\beta}\tilde{F}^{\alpha\beta} = -4(\mathbf{E}\cdot\mathbf{B})$ sebagai kontraksi langsung dua tensor orde-2.
+2. **Dualitas Elektromagnetik & Monopol Magnetik:** Memperjelas simetri pertukaran $\mathbf{E} \leftrightarrow \mathbf{B}$. Jika arus monopol magnetik ($J_m^\beta$) eksis, persamaan homogen langsung termodifikasi menjadi $\partial_\alpha \tilde{F}^{\alpha\beta} = \frac{4\pi}{c}J_m^\beta$.
+3. **Konstruksi Invarian Pseudoskalar:** Memungkinkan perumusan invarian kedua $F_{\alpha\beta}\tilde{F}^{\alpha\beta} = -4(\mathbf{E}\cdot\mathbf{B})$ sebagai kontraksi langsung dua tensor orde-2.
 :::
-:::
+::::
 
 ## 6. Ringkasan Persamaan Maxwell Kovarian & Gaya Lorentz
 
-Keempat persamaan Maxwell klasik (satuan Gaussian) diringkas menjadi dua persamaan 4-tensor kovarian:
+Keempat persamaan Maxwell klasik (dalam satuan Gaussian) terangkum secara kompak dalam dua persamaan 4-tensor kovarian:
 
-::: {.columns}
-::: {.column width="50%"}
-::: {.fragment}
-::: {.box-blue}
-**1. Persamaan Inhomogen (Ada Sumber)**
+::::::::: columns
+::::: {.column width="50%"}
+:::: fragment
+::: box-blue
+**1. Persamaan Inhomogen (Dengan Sumber)**
 
 $$\partial_\alpha F^{\alpha\beta} = \frac{4\pi}{c} J^\beta$$
 
-- $\beta = 0 \implies \nabla \cdot \mathbf{E} = 4\pi\rho$ *(Gauss)*
-- $\beta = i \implies \nabla \times \mathbf{B} - \frac{1}{c}\frac{\partial\mathbf{E}}{\partial t} = \frac{4\pi}{c}\mathbf{J}$ *(Ampère-Maxwell)*
+- $\beta = 0 \implies \partial_i F^{i0} = \nabla \cdot \mathbf{E} = 4\pi\rho$ *(Gauss)*
+- $\beta = i \implies \nabla \times \mathbf{B} - \frac{1}{c}\frac{\partial\mathbf{E}}{\partial t} = \frac{4\pi}{c}\mathbf{J}$ *(Ampère–Maxwell)*
 :::
-:::
-:::
+::::
+:::::
 
-::: {.column width="50%"}
-::: {.fragment}
-::: {.box-green}
+::::: {.column width="50%"}
+:::: fragment
+::: box-green
 **2. Persamaan Homogen (Tanpa Sumber)**
 
 $$\partial_\alpha \tilde{F}^{\alpha\beta} = 0 \iff \partial_{[\alpha}F_{\beta\gamma]} = 0$$
 
-- $\beta = 0 \implies \nabla \cdot \mathbf{B} = 0$ *(Tiada Monopol)*
+- $\beta = 0 \implies \nabla \cdot \mathbf{B} = 0$ *(Ketiadaan Monopol)*
 - $\beta = i \implies \nabla \times \mathbf{E} + \frac{1}{c}\frac{\partial\mathbf{B}}{\partial t} = 0$ *(Faraday)*
 :::
+::::
+:::::
+:::::::::
+
+:::: fragment
+::: box-amber
+**Persamaan Gaya Lorentz Kovarian & Reduksi 3-Dimensinya:**
+
+$$\frac{dp^\alpha}{d\tau} = m \frac{dU^\alpha}{d\tau} = \frac{q}{c} F^{\alpha\beta} U_\beta \qquad \left(\text{dengan } U_\beta = \gamma(c, -\mathbf{v}), \; d\tau = \frac{dt}{\gamma}\right)$$
+
+- Komponen $\alpha = 0$: $\gamma \frac{d(E/c)}{dt} = \frac{q}{c} F^{0i}U_i = \gamma \frac{q}{c}(\mathbf{E}\cdot\mathbf{v}) \implies \frac{dE}{dt} = q\,\mathbf{v}\cdot\mathbf{E}$ *(Laju Kerja)*.
+- Komponen $\alpha = i$: $\gamma \frac{dp_i}{dt} = \frac{q}{c}(F^{i0}U_0 + F^{ij}U_j) \implies \frac{d\mathbf{p}}{dt} = q\left(\mathbf{E} + \frac{\mathbf{v}}{c}\times\mathbf{B}\right)$ *(Gaya Lorentz)*.
 :::
-:::
-:::
+::::
 
-::: {.fragment}
-**Persamaan Gaya Lorentz Kovarian:**
+## 7. Transformasi Medan $\mathbf{E}$ dan $\mathbf{B}$ (1/2): *Boost* Sumbu-$x_1$
 
-$$\frac{dp^\alpha}{d\tau} = m \frac{dU^\alpha}{d\tau} = \frac{q}{c} F^{\alpha\beta} U_\beta$$
-:::
+Karena $F^{\alpha\beta}$ adalah tensor kontravarian orde-2, ia bertransformasi mengikuti aturan $F'^{\alpha\beta} = \Lambda^\alpha{}_\gamma \Lambda^\beta{}_\delta F^{\gamma\delta}$, atau dalam notasi matriks $F' = \Lambda F \Lambda^T$ (dengan $\Lambda^T = \Lambda$):
 
-## 7. Transformasi Medan $\mathbf{E}$ dan $\mathbf{B}$ (1/2): Boost Sumbu-$x_1$
-
-Karena $F^{\alpha\beta}$ adalah tensor orde-2, ia bertransformasi melalui perkalian matriks $F'^{\alpha\beta} = \Lambda^\alpha{}_\gamma \Lambda^\beta{}_\delta F^{\gamma\delta}$ (atau $F' = \Lambda F \Lambda^T$):
-
-::: {.fragment}
-::: {.small-math}
+:::: fragment
+::: small-math
 $$F' = \begin{pmatrix} \gamma & -\gamma\beta & 0 & 0 \\ -\gamma\beta & \gamma & 0 & 0 \\ 0 & 0 & 1 & 0 \\ 0 & 0 & 0 & 1 \end{pmatrix} \begin{pmatrix} 0 & -E_1 & -E_2 & -E_3 \\ E_1 & 0 & -B_3 & B_2 \\ E_2 & B_3 & 0 & -B_1 \\ E_3 & -B_2 & B_1 & 0 \end{pmatrix} \begin{pmatrix} \gamma & -\gamma\beta & 0 & 0 \\ -\gamma\beta & \gamma & 0 & 0 \\ 0 & 0 & 1 & 0 \\ 0 & 0 & 0 & 1 \end{pmatrix}$$
 :::
+::::
+
+::: fragment
+Sebagai ilustrasi, perkalian indeks untuk komponen longitudinal $E'_1 = F'^{10}$ dan transversal $E'_2 = F'^{20}$ memberikan:
+
+$$F'^{10} = \gamma^2 F^{10} - \gamma^2\beta^2 F^{01} = \gamma^2(1-\beta^2)E_1 = E_1, \qquad F'^{20} = \gamma F^{20} - \gamma\beta F^{21} = \gamma(E_2 - \beta B_3)$$
 :::
 
-::: {.fragment}
-::: {.box-blue}
-**Hasil Komponen untuk Boost Sejajar Sumbu-$x_1$:**
+:::: fragment
+::: box-blue
+**Himpunan Lengkap Komponen Medan untuk *Boost* Sejajar Sumbu-$x_1$:**
 
 $$\begin{aligned}
 E'_1 &= E_1, & E'_2 &= \gamma(E_2 - \beta B_3), & E'_3 &= \gamma(E_3 + \beta B_2) \\
 B'_1 &= B_1, & B'_2 &= \gamma(B_2 + \beta E_3), & B'_3 &= \gamma(B_3 - \beta E_2)
 \end{aligned}$$
 :::
-:::
+::::
 
 ## 7. Transformasi Medan $\mathbf{E}$ dan $\mathbf{B}$ (2/2): Bentuk Vektorial Umum
 
-Untuk kecepatan relatif sembarang $\mathbf{v} = c\boldsymbol{\beta}$, kita pisahkan medan menjadi komponen sejajar ($\parallel$) dan tegak lurus ($\perp$) terhadap $\boldsymbol{\beta}$:
+Untuk kecepatan relatif sembarang $\mathbf{v} = c\boldsymbol{\beta}$, medan diuraikan menjadi komponen sejajar ($\parallel$) dan tegak lurus ($\perp$) terhadap arah gerak $\boldsymbol{\beta}$:
 
-::: {.fragment}
+::: fragment
 $$\mathbf{E}'_\parallel = \mathbf{E}_\parallel, \qquad \mathbf{E}'_\perp = \gamma(\mathbf{E}_\perp + \boldsymbol{\beta} \times \mathbf{B})$$
 $$\mathbf{B}'_\parallel = \mathbf{B}_\parallel, \qquad \mathbf{B}'_\perp = \gamma(\mathbf{B}_\perp - \boldsymbol{\beta} \times \mathbf{E})$$
 :::
 
-::: {.fragment}
-Dengan mensubstitusikan $\mathbf{E}_\parallel = \frac{(\boldsymbol{\beta}\cdot\mathbf{E})}{\beta^2}\boldsymbol{\beta}$ dan $\mathbf{E}_\perp = \mathbf{E} - \mathbf{E}_\parallel$, diperoleh **Bentuk Vektorial Umum**:
+::: fragment
+Dengan mensubstitusikan $\mathbf{E}_\parallel = \frac{(\boldsymbol{\beta}\cdot\mathbf{E})}{\beta^2}\boldsymbol{\beta}$, $\mathbf{E}_\perp = \mathbf{E} - \mathbf{E}_\parallel$, serta identitas $1 - \gamma = -\frac{\gamma^2 \beta^2}{\gamma + 1}$, diperoleh **Bentuk Vektorial Umum**:
 
 $$\begin{aligned}
-\mathbf{E}' &= \gamma(\mathbf{E} + \boldsymbol{\beta} \times \mathbf{B}) - \frac{\gamma^2}{\gamma+1}\boldsymbol{\beta}(\boldsymbol{\beta} \cdot \mathbf{E}) \\
-\mathbf{B}' &= \gamma(\mathbf{B} - \boldsymbol{\beta} \times \mathbf{E}) - \frac{\gamma^2}{\gamma+1}\boldsymbol{\beta}(\boldsymbol{\beta} \cdot \mathbf{B})
+\mathbf{E}' &= \mathbf{E}'_\parallel + \mathbf{E}'_\perp = \gamma(\mathbf{E} + \boldsymbol{\beta} \times \mathbf{B}) - \frac{\gamma^2}{\gamma+1}\boldsymbol{\beta}(\boldsymbol{\beta} \cdot \mathbf{E}) \\
+\mathbf{B}' &= \mathbf{B}'_\parallel + \mathbf{B}'_\perp = \gamma(\mathbf{B} - \boldsymbol{\beta} \times \mathbf{E}) - \frac{\gamma^2}{\gamma+1}\boldsymbol{\beta}(\boldsymbol{\beta} \cdot \mathbf{B})
 \end{aligned}$$
 :::
 
-::: {.fragment}
-::: {.box-red}
-**Kesimpulan Utama:** Medan listrik murni ($\mathbf{B}=0$) di satu kerangka akan teramati sebagai campuran $\mathbf{E}'$ dan $\mathbf{B}'$ di kerangka lain!
+:::: fragment
+::: box-red
+**Implikasi Fisis Utama:** Medan listrik murni ($\mathbf{B}=0$) pada satu kerangka acuan inersial akan teramati sebagai superposisi medan listrik $\mathbf{E}'$ dan medan magnetik $\mathbf{B}'$ pada kerangka acuan inersial lainnya!
 :::
-:::
+::::
 
 ## 8. Aplikasi 1: Medan Muatan Titik Relativistik
 
-Muatan titik $q$ diam di kerangka $K'$ ($\mathbf{E}' = \frac{q\mathbf{r}'}{r'^3}, \; \mathbf{B}' = 0$) bergerak dengan kecepatan $v$ melewati pengamat di $K$ pada jarak impak $b$ ($x'_1 = -\gamma v t, \; x'_2 = b, \; x'_3 = 0$):
+Muatan titik $q$ diam di kerangka $K'$ ($\mathbf{E}' = \frac{q\mathbf{r}'}{r'^3}, \; \mathbf{B}' = 0$) bergerak dengan kecepatan $v$ sepanjang sumbu-$x_1$ melewati pengamat di $K$ pada parameter dampak (*impact parameter*) $b$ ($x'_1 = -\gamma v t, \; x'_2 = b, \; x'_3 = 0$):
 
-::: {.columns}
-::: {.column width="50%"}
-::: {.fragment}
+::::::: columns
+:::: {.column width="50%"}
+::: fragment
 **Medan di Kerangka Pengamat $K$:**
 
 $$\begin{aligned}
@@ -488,74 +508,76 @@ E_2 &= \gamma E'_2 = \frac{\gamma q b}{(b^2 + \gamma^2 v^2 t^2)^{3/2}} \\
 B_3 &= \gamma \beta E'_2 = \beta E_2
 \end{aligned}$$
 :::
-:::
+::::
 
-::: {.column width="50%"}
-::: {.fragment}
-**Distribusi Spasial (Bentuk *Whiskbroom*):**
+:::: {.column width="50%"}
+::: fragment
+**Distribusi Spasial (*Whiskbroom*):**
+
+Pada $t=0$, dengan $x'_1 = \gamma r \cos\psi$ dan $x'_\perp = r \sin\psi$, diperoleh $r' = \gamma r \sqrt{1 - \beta^2 \sin^2\psi}$, sehingga:
 
 $$\mathbf{E}(\mathbf{r}, \psi) = \frac{q \mathbf{r}}{r^3 \gamma^2 (1 - \beta^2 \sin^2 \psi)^{3/2}}$$
 
-*(dengan $\psi$ sudut antara $\mathbf{v}$ dan $\mathbf{r}$)*
+*(dengan $\psi$ menyatakan sudut antara $\mathbf{v}$ dan $\mathbf{r}$)*
 :::
-:::
-:::
+::::
+:::::::
 
-::: {.incremental}
-- **Kompresi Transversal ($\psi = \pi/2$):** Medan listrik menguat sebesar faktor $\gamma$, sementara durasi impuls menyempit $\Delta t \sim \frac{b}{\gamma v}$.
-- **Limit Ultrarelativistik ($\beta \to 1$):** Medan terkompresi di bidang tegak lurus gerak, menyerupai pulsa radiasi gelombang datar terpolarisasi (*Metode Virtual Quanta Weizsäcker-Williams*).
+::: incremental
+- **Kompresi Transversal ($\psi = \pi/2$):** Intensitas medan listrik menguat sebesar faktor $\gamma$, sedangkan lebar durasi pulsa menyempit menjadi $\Delta t \sim \frac{b}{\gamma v}$.
+- **Limit Ultrarelativistik ($\beta \to 1$):** Garis medan terkompresi tajam pada bidang tegak lurus arah gerak, menyerupai pulsa radiasi gelombang datar terpolarisasi (*Metode Kuanta Virtual Weizsäcker–Williams*).
 :::
 
 ## 9. Aplikasi 2: Presesi Thomas & Persamaan BMT
 
-::: {.fragment}
-::: {.box-amber}
-**Presesi Thomas ($\boldsymbol{\omega}_T$):** Dua Lorentz Boost berturut-turut pada arah berbeda tidak komutatif ($[K_i, K_j] = -\epsilon_{ijk}S_k$), sehingga muncul rotasi kinematik murni:
+:::: fragment
+::: box-amber
+**Presesi Thomas ($\boldsymbol{\omega}_T$):** Dua *Lorentz boost* berturut-turut pada arah yang tidak kolinear tidak bersifat komutatif ($[K_i, K_j] = -\epsilon_{ijk}S_k$), sehingga memunculkan rotasi kinematik murni (*Rotasi Wigner*) dengan laju sudut:
 
 $$\boldsymbol{\omega}_T = \frac{\gamma^2}{\gamma+1} \frac{\mathbf{a} \times \mathbf{v}}{c^2} \approx \frac{1}{2c^2} (\mathbf{a} \times \mathbf{v})$$
 
-Mengoreksi energi interaksi spin-orbit atom hidrogen sebesar **faktor $\frac{1}{2}$ (Faktor Thomas)**.
+Efek kinematik ini mengoreksi energi interaksi *spin–orbit* pada atom hidrogen tepat sebesar **faktor $\frac{1}{2}$** (*Faktor Thomas*).
 :::
-:::
+::::
 
-::: {.fragment}
-**Persamaan Bargmann–Michel–Telegdi (BMT) untuk Spin 4-Vektor ($S^\alpha$):**
+::: fragment
+**Persamaan Bargmann–Michel–Telegdi (BMT) untuk 4-Vektor Spin ($S^\alpha$):**
 
-Dengan syarat ortogonalitas di kerangka diam partikel ($S^\alpha U_\alpha = 0$):
+Dengan syarat ortogonalitas di kerangka diam partikel ($S^\alpha U_\alpha = 0 \implies \frac{dS^\alpha}{d\tau}U_\alpha = -S^\alpha\frac{dU_\alpha}{d\tau}$), evolusi relativistik spin dalam medan elektromagnetik homogen memenuhi:
 
 $$\frac{dS^\alpha}{d\tau} = \frac{e}{mc} \left[ \frac{g}{2} F^{\alpha\beta} S_\beta + \frac{1}{c^2} \left(\frac{g}{2} - 1\right) U^\alpha \left(S_\lambda F^{\lambda\mu} U_\mu\right) \right]$$
 
-*(Suku kedua mendeskripsikan presesi anomali $g-2$ yang menjadi dasar eksperimen presisi momen magnetik muon/elektron).*
+*(Suku kedua sebanding dengan anomali momen magnetik $a = \frac{g-2}{2}$ yang menjadi landasan teoretis eksperimen presisi $g-2$ muon dan elektron).*
 :::
 
-## 10. Ringkasan Invarian Lorentz Medan EM
+## 10. Invarian Lorentz Medan Elektromagnetik
 
-Meskipun komponen $\mathbf{E}$ dan $\mathbf{B}$ berubah antar kerangka inersia, dua kontraksi skalar berikut bernilai **mutlak sama** di semua kerangka acuan:
+Meskipun komponen $\mathbf{E}$ dan $\mathbf{B}$ berubah antarkerangka acuan inersial, kontraksi penuh tensor $F^{\alpha\beta}$ dan dualnya $\tilde{F}^{\alpha\beta}$ menghasilkan dua besaran skalar yang **mutlak invarian**:
 
-::: {.columns}
-::: {.column width="50%"}
-::: {.fragment}
-::: {.box-blue}
-**1. Invarian Skalar:**
+::::::::: columns
+::::: {.column width="50%"}
+:::: fragment
+::: box-blue
+**1. Invarian Skalar Sejati:**
 
-$$F_{\alpha\beta} F^{\alpha\beta} = 2(\mathbf{B}^2 - \mathbf{E}^2) = \text{invarian}$$
+$$F_{\alpha\beta} F^{\alpha\beta} = 2F_{0i}F^{0i} + F_{ij}F^{ij} = 2(\mathbf{B}^2 - \mathbf{E}^2)$$
 
-- Medan dominan listrik ($|\mathbf{E}| > |\mathbf{B}|$) tetap dominan listrik di kerangka mana pun.
-- Untuk gelombang elektromagnetik di vakum ($|\mathbf{E}| = |\mathbf{B}|$), nilainya selalu $0$.
+- Medan dominan listrik ($|\mathbf{E}| > |\mathbf{B}|$) tetap dominan listrik di seluruh kerangka inersial.
+- Untuk gelombang elektromagnetik di ruang hampa ($|\mathbf{E}| = |\mathbf{B}|$), invarian ini selalu bernilai $0$.
 :::
-:::
-:::
+::::
+:::::
 
-::: {.column width="50%"}
-::: {.fragment}
-::: {.box-green}
+::::: {.column width="50%"}
+:::: fragment
+::: box-green
 **2. Invarian Pseudoskalar:**
 
-$$F_{\alpha\beta} \tilde{F}^{\alpha\beta} = -4(\mathbf{E} \cdot \mathbf{B}) = \text{invarian}$$
+$$F_{\alpha\beta} \tilde{F}^{\alpha\beta} = 2F_{0i}\tilde{F}^{0i} + F_{ij}\tilde{F}^{ij} = -4(\mathbf{E} \cdot \mathbf{B})$$
 
-- Jika $\mathbf{E} \perp \mathbf{B}$ di satu kerangka, keduanya selalu tegak lurus di semua kerangka acuan.
-- Jika $\mathbf{E}\cdot\mathbf{B} = 0$ dan $|\mathbf{E}| \neq |\mathbf{B}|$, selalu ada kerangka di mana medan murni listrik atau murni magnet.
+- Apabila $\mathbf{E} \perp \mathbf{B}$ di satu kerangka, sifat ortogonalitas tersebut berlaku di semua kerangka acuan.
+- Apabila $\mathbf{E}\cdot\mathbf{B} = 0$ dan $|\mathbf{E}| \neq |\mathbf{B}|$, selalu terdapat kerangka inersial di mana medan teramati murni listrik atau murni magnetik.
 :::
-:::
-:::
-:::
+::::
+:::::
+:::::::::

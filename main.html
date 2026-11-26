@@ -6,24 +6,27 @@
 <script src="main_files/libs/quarto-html/tippy.umd.min.js"></script>
 <link href="main_files/libs/quarto-html/tippy.css" rel="stylesheet">
 <link href="main_files/libs/quarto-html/light-border.css" rel="stylesheet">
-<link href="main_files/libs/quarto-html/quarto-syntax-highlighting-7f8f88aac4f3542376d5c11b86a4c14d.css" rel="stylesheet" id="quarto-text-highlighting-styles"><meta charset="utf-8">
-  <meta name="generator" content="quarto-1.9.37">
+<link href="main_files/libs/quarto-html/quarto-syntax-highlighting-63b5708e65d6cd79cd7618c58d0c21e7.css" rel="stylesheet" id="quarto-text-highlighting-styles"><meta charset="utf-8">
+  <meta name="generator" content="quarto-1.11.9">
 
-  <meta name="author" content="Kuliah Elektrodinamika">
+  <meta name="author" content="Kuliah Elektrodinamika Pascasarjana">
   <title>Transformasi Medan Elektromagnetik</title>
   <meta name="apple-mobile-web-app-capable" content="yes">
   <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, minimal-ui">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <link rel="stylesheet" href="main_files/libs/revealjs/dist/reset.css">
   <link rel="stylesheet" href="main_files/libs/revealjs/dist/reveal.css">
   <style>
     /* Default styles provided by pandoc.
     ** See https://pandoc.org/MANUAL.html#variables-for-html for config info.
     */
-    code{white-space: pre-wrap;}
     span.smallcaps{font-variant: small-caps;}
-    div.columns{display: flex; gap: min(4vw, 1.5em);}
-    div.column{flex: auto; overflow-x: auto;}
+    div.columns{display: flex; gap: 1.5em;}
+    div.column{flex: auto;}
+    @media screen {
+    div.columns{gap: min(4vw, 1.5em);}
+    div.column{overflow-x: auto;}
+    }
     div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
     ul.task-list{list-style: none;}
     ul.task-list li input[type="checkbox"] {
@@ -32,7 +35,7 @@
       vertical-align: middle;
     }
   </style>
-  <link rel="stylesheet" href="main_files/libs/revealjs/dist/theme/quarto-97ddeeafa123584f7473b78c4303955c.css">
+  <link rel="stylesheet" href="main_files/libs/revealjs/dist/theme/quarto-cf654ac9a664dc7a27bfc4448a225b45.css">
   <link href="main_files/libs/revealjs/plugin/quarto-line-highlight/line-highlight.css" rel="stylesheet">
   <link href="main_files/libs/revealjs/plugin/reveal-menu/menu.css" rel="stylesheet">
   <link href="main_files/libs/revealjs/plugin/reveal-menu/quarto-menu.css" rel="stylesheet">
@@ -133,95 +136,99 @@
 
 <section id="title-slide" class="quarto-title-block center">
   <h1 class="title">Transformasi Medan Elektromagnetik</h1>
-  <p class="subtitle">Elektrodinamika Relativistik — J.D. Jackson (Bab 11)</p>
+  <p class="subtitle">Formulasi Kovarian Elektrodinamika Relativistik — J.D. Jackson (Bab 11)</p>
 
 <div class="quarto-title-authors">
 <div class="quarto-title-author">
 <div class="quarto-title-author-name">
-Kuliah Elektrodinamika 
+Kuliah Elektrodinamika Pascasarjana
 </div>
 </div>
 </div>
 
 </section>
-<section id="peta-alur-pembelajaran-from-scratch" class="slide level2 center">
-<h2>Peta Alur Pembelajaran (From Scratch)</h2>
+<section id="kerangka-pembahasan" class="slide level2 center">
+<h2>Kerangka Pembahasan</h2>
 <ol type="1">
-<li class="fragment"><strong>Krisis Elektrodinamika Klasik</strong>: Mengapa Transformasi Galilei merusak invariansi persamaan gelombang Maxwell?</li>
-<li class="fragment"><strong>Solusi Einstein &amp; Transformasi Lorentz</strong>: Penurunan aljabar <span class="math inline">\(x'\)</span>, <span class="math inline">\(t'\)</span>, faktor <span class="math inline">\(\gamma\)</span>, dan matriks boost <span class="math inline">\(\Lambda^\alpha{}_\beta\)</span>.</li>
-<li class="fragment"><strong>Geometri Minkowski</strong>: Ruang-waktu 4D, metrik <span class="math inline">\(g_{\alpha\beta}\)</span>, 4-vektor, dan operator turunan <span class="math inline">\(\partial_\alpha\)</span>.</li>
-<li class="fragment"><strong>Kovariansi Sumber, Potensial &amp; Tera Lorenz</strong>: Mengapa syarat <span class="math inline">\(\partial_\alpha A^\alpha = 0\)</span> mutlak diperlukan?</li>
-<li class="fragment"><strong>Penyatuan <span class="math inline">\(\mathbf{E}\)</span> &amp; <span class="math inline">\(\mathbf{B}\)</span> dalam Tensor <span class="math inline">\(F^{\alpha\beta}\)</span> &amp; <span class="math inline">\(\tilde{F}^{\alpha\beta}\)</span></strong>: Mengapa butuh tensor rank-2 dan apa peran <span class="math inline">\(F^{\alpha\beta}\)</span> vs.&nbsp;<span class="math inline">\(\tilde{F}^{\alpha\beta}\)</span>?</li>
-<li class="fragment"><strong>Transformasi Medan, Aplikasi Relativistik &amp; Invarian Lorentz</strong>: Muatan bergerak cepat, Presesi Thomas, &amp; BMT.</li>
+<li class="fragment"><strong>Krisis Elektrodinamika Klasik</strong>: Mengapa Transformasi Galilei merusak kovariansi persamaan gelombang Maxwell?</li>
+<li class="fragment"><strong>Postulat Einstein &amp; Transformasi Lorentz</strong>: Penurunan aljabar <span class="math inline">\(x'\)</span>, <span class="math inline">\(t'\)</span>, faktor Lorentz <span class="math inline">\(\gamma\)</span>, serta matriks <em>boost</em> <span class="math inline">\(\Lambda^\alpha{}_\beta\)</span>.</li>
+<li class="fragment"><strong>Geometri Ruang-Waktu Minkowski</strong>: Metrik <span class="math inline">\(g_{\alpha\beta}\)</span>, aljabar 4-vektor, operator turunan <span class="math inline">\(\partial_\alpha\)</span>, dan invariansi <em>d’Alembertian</em> <span class="math inline">\(\square\)</span>.</li>
+<li class="fragment"><strong>Kovariansi Sumber, Potensial, dan Tera Lorenz</strong>: Mengapa syarat <span class="math inline">\(\partial_\alpha A^\alpha = 0\)</span> esensial bagi pemisahan persamaan gelombang?</li>
+<li class="fragment"><strong>Unifikasi <span class="math inline">\(\mathbf{E}\)</span> dan <span class="math inline">\(\mathbf{B}\)</span> dalam Tensor <span class="math inline">\(F^{\alpha\beta}\)</span> dan <span class="math inline">\(\tilde{F}^{\alpha\beta}\)</span></strong>: Argumen derajat kebebasan, konstruksi tensor, dan peran dualitas.</li>
+<li class="fragment"><strong>Transformasi Medan, Aplikasi Relativistik, dan Invarian Lorentz</strong>: Muatan bergerak relativistik, Presesi Thomas, Persamaan BMT, serta besaran invarian.</li>
 </ol>
 </section>
 <section id="krisis-klasik-kegagalan-transformasi-galilei" class="slide level2 center">
 <h2>1. Krisis Klasik: Kegagalan Transformasi Galilei</h2>
 <div class="box-blue">
-<p><strong>Mekanika Newton (Invarian):</strong> Di bawah Transformasi Galilei (<span class="math inline">\(\mathbf{x}' = \mathbf{x} - \mathbf{v}t, \; t' = t\)</span>), percepatan tetap sama (<span class="math inline">\(\ddot{\mathbf{x}}' = \ddot{\mathbf{x}}\)</span>), sehingga <span class="math inline">\(m\frac{d^2\mathbf{x}}{dt^2} = \mathbf{F}\)</span> mempertahankan bentuknya di semua kerangka inersia.</p>
+<p><strong>Mekanika Newton (Kovarian Galilei):</strong> Di bawah Transformasi Galilei (<span class="math inline">\(\mathbf{x}' = \mathbf{x} - \mathbf{v}t, \; t' = t\)</span>), percepatan bersifat invarian (<span class="math inline">\(\ddot{\mathbf{x}}' = \ddot{\mathbf{x}}\)</span>), sehingga hukum kedua Newton <span class="math inline">\(m\frac{d^2\mathbf{x}}{dt^2} = \mathbf{F}\)</span> mempertahankan bentuknya di seluruh kerangka acuan inersial.</p>
 </div>
 <div class="fragment">
-<p><strong>Persamaan Gelombang Elektromagnetik di Kerangka <span class="math inline">\(K'\)</span>:</strong></p>
+<p><strong>Persamaan Gelombang Elektromagnetik pada Kerangka <span class="math inline">\(K'\)</span>:</strong></p>
 <p><span class="math display">\[\left( \nabla'^2 - \frac{1}{c^2}\frac{\partial^2}{\partial t'^2} \right) \psi = 0\]</span></p>
 </div>
 <div class="fragment">
-<p><strong>Aturan Rantai (Chain Rule) dari Transformasi Galilei (<span class="math inline">\(x'_i = x_i - v_i t, \; t' = t\)</span>):</strong></p>
+<p><strong>Transformasi Operator Turunan (Aturan Rantai untuk <span class="math inline">\(x'_i = x_i - v_i t, \; t' = t\)</span>):</strong></p>
 <p><span class="math display">\[\begin{aligned}
-\frac{\partial}{\partial x_i} &amp;= \frac{\partial x'_j}{\partial x_i}\frac{\partial}{\partial x'_j} + \frac{\partial t'}{\partial x_i}\frac{\partial}{\partial t'} \implies \nabla = \nabla' \\
+\frac{\partial}{\partial x_i} &amp;= \frac{\partial x'_j}{\partial x_i}\frac{\partial}{\partial x'_j} + \frac{\partial t'}{\partial x_i}\frac{\partial}{\partial t'} = \delta_{ij}\frac{\partial}{\partial x'_j} \implies \nabla = \nabla' \\
 \frac{\partial}{\partial t} &amp;= \frac{\partial x'_j}{\partial t}\frac{\partial}{\partial x'_j} + \frac{\partial t'}{\partial t}\frac{\partial}{\partial t'} = -\mathbf{v}\cdot\nabla' + \frac{\partial}{\partial t'} \implies \frac{\partial}{\partial t'} = \frac{\partial}{\partial t} + \mathbf{v} \cdot \nabla
 \end{aligned}\]</span></p>
 </div>
 </section>
 <section id="krisis-klasik-munculnya-suku-konvektif" class="slide level2 center">
 <h2>1. Krisis Klasik: Munculnya Suku Konvektif</h2>
-<p>Substitusi operator turunan kedua waktu <span class="math inline">\(\frac{\partial^2}{\partial t'^2} = \left(\frac{\partial}{\partial t} + \mathbf{v} \cdot \nabla\right)^2\)</span> ke persamaan gelombang menghasilkan:</p>
+<p>Untuk kecepatan relatif <span class="math inline">\(\mathbf{v}\)</span> yang konstan, operator turunan kedua terhadap waktu menjadi:</p>
+<p><span class="math display">\[\frac{\partial^2}{\partial t'^2} = \left(\frac{\partial}{\partial t} + \mathbf{v} \cdot \nabla\right)\left(\frac{\partial}{\partial t} + \mathbf{v} \cdot \nabla\right) = \frac{\partial^2}{\partial t^2} + 2(\mathbf{v}\cdot\nabla)\frac{\partial}{\partial t} + (\mathbf{v}\cdot\nabla)^2\]</span></p>
 <div class="fragment">
 <div class="box-red">
+<p><strong>Persamaan Gelombang di Kerangka <span class="math inline">\(K\)</span> (Kehilangan Kovariansi):</strong></p>
 <p><span class="math display">\[\left[ \nabla^2 - \frac{1}{c^2}\frac{\partial^2}{\partial t^2} {\color{#dc2626}- \frac{2}{c^2}(\mathbf{v}\cdot\nabla)\frac{\partial}{\partial t} - \frac{1}{c^2}(\mathbf{v}\cdot\nabla)^2} \right] \psi = 0\]</span></p>
 </div>
 </div>
 <ul>
-<li class="fragment"><strong>Kerusakan Invariansi:</strong> Munculnya suku konvektif merah mengubah kecepatan rambat gelombang efektif bergantung pada arah dan laju pengamat <span class="math inline">\(\mathbf{v}\)</span>.</li>
-<li class="fragment"><strong>Implikasi Fisik:</strong> Laju cahaya <span class="math inline">\(c\)</span> hanya bernilai tepat <span class="math inline">\(c = 1/\sqrt{\mu_0\varepsilon_0}\)</span> di satu kerangka acuan istimewa (<em>Kerangka Diam Eter</em>).</li>
-<li class="fragment"><strong>Pilihan Einstein (1905):</strong> Menolak konsep Eter, mempertahankan bentuk kovarian Persamaan Maxwell di semua kerangka inersia, dan mengganti Transformasi Galilei dengan <strong>Transformasi Lorentz</strong>.</li>
+<li class="fragment"><strong>Pelanggaran Invariansi:</strong> Kehadiran suku konvektif (merah) mengubah laju rambat gelombang efektif menjadi bergantung pada arah serta kelajuan pengamat <span class="math inline">\(\mathbf{v}\)</span>.</li>
+<li class="fragment"><strong>Konsekuensi Paradigma Klasik:</strong> Nilai <span class="math inline">\(c = 1/\sqrt{\mu_0\varepsilon_0}\)</span> hanya berlaku di satu kerangka acuan istimewa (<em>kerangka diam eter</em>), yang bertentangan dengan hasil eksperimen Michelson–Morley.</li>
+<li class="fragment"><strong>Resolusi Einstein (1905):</strong> Menanggalkan hipotesis eter, menegakkan prinsip relativitas bagi elektrodinamika Maxwell, dan mengganti Transformasi Galilei dengan <strong>Transformasi Lorentz</strong>.</li>
 </ul>
 </section>
 <section id="penurunan-transformasi-lorentz-12-aljabar-x-dan-t" class="slide level2 center">
 <h2>2. Penurunan Transformasi Lorentz (1/2): Aljabar <span class="math inline">\(x'\)</span> dan <span class="math inline">\(t'\)</span></h2>
-<p><strong>Landasan (Postulat 2):</strong> Laju cahaya <span class="math inline">\(c\)</span> konstan di semua kerangka inersia, sehingga <strong>Interval Ruang-Waktu (<span class="math inline">\(s^2\)</span>)</strong> harus invarian:</p>
+<p><strong>Landasan Postulat Kedua:</strong> Laju rambat cahaya <span class="math inline">\(c\)</span> dalam ruang hampa bersifat invarian di seluruh kerangka acuan inersial, sehingga <strong>interval ruang-waktu (<span class="math inline">\(s^2\)</span>)</strong> harus bernilai sama:</p>
 <p><span class="math display">\[s^2 = c^2 t^2 - x^2 - y^2 - z^2 = c^2 t'^2 - x'^2 - y'^2 - z'^2\]</span></p>
 <div class="columns">
 <div class="column" style="width:50%;">
 <div class="fragment">
-<p><strong>Langkah 1: Bentuk Linier (Homogenitas &amp; Isotropi)</strong></p>
-<p>Untuk boost sejajar sumbu-<span class="math inline">\(x\)</span> (<span class="math inline">\(y'=y, \; z'=z\)</span>):</p>
+<p><strong>Langkah 1: Bentuk Linear (Homogenitas &amp; Isotropi)</strong></p>
+<p>Untuk <em>boost</em> sejajar sumbu-<span class="math inline">\(x\)</span> (<span class="math inline">\(y'=y, \; z'=z\)</span>), simetri ruang-waktu menuntut hubungan linear:</p>
 <p><span class="math display">\[x' = \gamma(x - vt)\]</span></p>
-<p>Dengan prinsip relativitas (<span class="math inline">\(v \to -v\)</span>):</p>
+<p>Berdasarkan prinsip relativitas (<span class="math inline">\(v \to -v\)</span>):</p>
 <p><span class="math display">\[x = \gamma(x' + vt')\]</span></p>
 </div>
 </div><div class="column" style="width:50%;">
 <div class="fragment">
-<p><strong>Langkah 2: Mengisolasi <span class="math inline">\(t'\)</span></strong></p>
-<p>Substitusikan <span class="math inline">\(x'\)</span> ke persamaan balik <span class="math inline">\(x\)</span>:</p>
+<p><strong>Langkah 2: Eliminasi untuk Memperoleh <span class="math inline">\(t'\)</span></strong></p>
+<p>Substitusikan <span class="math inline">\(x'\)</span> ke dalam persamaan balik <span class="math inline">\(x\)</span>:</p>
 <p><span class="math display">\[\begin{aligned}
 x &amp;= \gamma\big[\gamma(x - vt) + vt'\big] \\
 \frac{x}{\gamma} &amp;= \gamma x - \gamma v t + v t' \\
+v t' &amp;= \gamma v t - x\left(\gamma - \frac{1}{\gamma}\right) \\
 t' &amp;= \gamma \left[ t - \frac{x}{v}\left(1 - \frac{1}{\gamma^2}\right) \right]
 \end{aligned}\]</span></p>
 </div>
 </div></div>
 </section>
-<section id="penentuan-faktor-gamma-matriks-lorentz-boost" class="slide level2 center">
-<h2>2. Penentuan Faktor <span class="math inline">\(\gamma\)</span> &amp; Matriks Lorentz Boost</h2>
-<p>Substitusikan <span class="math inline">\(x'\)</span> dan <span class="math inline">\(t'\)</span> ke syarat invariansi <span class="math inline">\(c^2 t'^2 - x'^2 = c^2 t^2 - x^2\)</span> (dengan menyamakan koefisien <span class="math inline">\(t^2\)</span>):</p>
+<section id="penurunan-transformasi-lorentz-22-faktor-gamma-matriks-boost" class="slide level2 center">
+<h2>2. Penurunan Transformasi Lorentz (2/2): Faktor <span class="math inline">\(\gamma\)</span> &amp; Matriks <em>Boost</em></h2>
+<p>Substitusikan <span class="math inline">\(x'\)</span> dan <span class="math inline">\(t'\)</span> ke syarat invariansi <span class="math inline">\(c^2 t'^2 - x'^2 = c^2 t^2 - x^2\)</span>, lalu samakan koefisien suku kuadratik <span class="math inline">\(t^2\)</span>:</p>
 <div class="fragment">
-<p><span class="math display">\[\gamma^2 c^2 t^2 - \gamma^2 v^2 t^2 = c^2 t^2 \implies \gamma^2\left(1 - \frac{v^2}{c^2}\right) = 1 \implies \gamma = \frac{1}{\sqrt{1 - \beta^2}} \quad \left(\beta = \frac{v}{c}\right)\]</span></p>
+<p><span class="math display">\[\gamma^2 c^2 t^2 - \gamma^2 v^2 t^2 = c^2 t^2 \implies \gamma^2\left(1 - \frac{v^2}{c^2}\right) = 1 \implies \gamma = \frac{1}{\sqrt{1 - \beta^2}} \quad \left(\beta \equiv \frac{v}{c}\right)\]</span></p>
+<p>Dengan identitas <span class="math inline">\(1 - \frac{1}{\gamma^2} = \beta^2\)</span>, diperoleh <span class="math inline">\(\frac{1}{v}\left(1 - \frac{1}{\gamma^2}\right) = \frac{v}{c^2}\)</span>, yang sekaligus menjamin kecocokan identik pada koefisien <span class="math inline">\(xt\)</span> dan <span class="math inline">\(x^2\)</span>.</p>
 </div>
 <div class="columns">
 <div class="column" style="width:52%;">
 <div class="fragment">
 <div class="box-green">
-<p><strong>Transformasi Lorentz Baku</strong> (karena <span class="math inline">\(1 - \frac{1}{\gamma^2} = \beta^2\)</span>):</p>
+<p><strong>Transformasi Lorentz Baku:</strong></p>
 <p><span class="math display">\[\begin{aligned}
 ct' &amp;= \gamma(ct - \beta x), &amp; y' &amp;= y \\
 x' &amp;= \gamma(x - \beta ct), &amp; z' &amp;= z
@@ -230,7 +237,7 @@ x' &amp;= \gamma(x - \beta ct), &amp; z' &amp;= z
 </div>
 </div><div class="column" style="width:48%;">
 <div class="fragment">
-<p><strong>Bentuk Matriks (<span class="math inline">\(x'^\alpha = \Lambda^\alpha{}_\beta x^\beta\)</span>):</strong></p>
+<p><strong>Representasi Matriks (<span class="math inline">\(x'^\alpha = \Lambda^\alpha{}_\beta x^\beta\)</span>):</strong></p>
 <p><span class="math display">\[\Lambda^\alpha{}_\beta = \begin{pmatrix}
 \gamma &amp; -\gamma\beta &amp; 0 &amp; 0 \\
 -\gamma\beta &amp; \gamma &amp; 0 &amp; 0 \\
@@ -248,7 +255,7 @@ x' &amp;= \gamma(x - \beta ct), &amp; z' &amp;= z
 <div class="fragment">
 <p><strong>Tensor Metrik Minkowski:</strong></p>
 <p><span class="math display">\[g_{\alpha\beta} = g^{\alpha\beta} = \begin{pmatrix} 1 &amp; 0 &amp; 0 &amp; 0 \\ 0 &amp; -1 &amp; 0 &amp; 0 \\ 0 &amp; 0 &amp; -1 &amp; 0 \\ 0 &amp; 0 &amp; 0 &amp; -1 \end{pmatrix}\]</span></p>
-<p>Sifat ortogonalitas: <span class="math inline">\(g_{\alpha\gamma} g^{\gamma\beta} = \delta_\alpha^\beta\)</span>.</p>
+<p>Sifat ortogonalitas metrik: <span class="math inline">\(g_{\alpha\gamma} g^{\gamma\beta} = \delta_\alpha^\beta\)</span>.</p>
 </div>
 </div><div class="column" style="width:54%;">
 <div class="fragment">
@@ -263,37 +270,37 @@ x' &amp;= \gamma(x - \beta ct), &amp; z' &amp;= z
 </div></div>
 <div class="fragment">
 <div class="box-blue">
-<p><strong>Syarat Invariansi Transformasi Lorentz:</strong> <span class="math inline">\(\Lambda^\mu{}_\alpha \, g_{\mu\nu} \, \Lambda^\nu{}_\beta = g_{\alpha\beta} \implies \text{Produk dalam } A_\alpha B^\alpha \text{ invarian!}\)</span></p>
+<p><strong>Syarat Ortogonalitas Transformasi Lorentz:</strong> Invariansi interval <span class="math inline">\(ds^2\)</span> menuntut <span class="math inline">\(\Lambda^\mu{}_\alpha \, g_{\mu\nu} \, \Lambda^\nu{}_\beta = g_{\alpha\beta}\)</span>, sehingga setiap produk skalar <span class="math inline">\(A'_\alpha B'^\alpha = g_{\mu\nu} \Lambda^\mu{}_\alpha \Lambda^\nu{}_\beta A^\alpha B^\beta = A_\alpha B^\alpha\)</span> bersifat <strong>invarian Lorentz</strong>.</p>
 </div>
 </div>
 </section>
 <section id="operator-turunan-4-dimensi-invariansi-dalembertian" class="slide level2 center">
-<h2>3. Operator Turunan 4-Dimensi &amp; Invariansi d’Alembertian</h2>
-<p>Dengan aturan rantai <span class="math inline">\(\partial_\alpha = \frac{\partial}{\partial x^\alpha}\)</span>, operator turunan 4-dimensi terbagi menjadi bentuk kovarian dan kontravarian:</p>
+<h2>3. Operator Turunan 4-Dimensi &amp; Invariansi <em>d’Alembertian</em></h2>
+<p>Berdasarkan aturan rantai pada transformasi koordinat invers <span class="math inline">\(x^\beta = (\Lambda^{-1})^\beta{}_\alpha x'^\alpha\)</span>, operator turunan <span class="math inline">\(\partial_\alpha \equiv \frac{\partial}{\partial x^\alpha}\)</span> bertransformasi secara <strong>kovarian</strong> dan terbagi menjadi dua bentuk:</p>
 <div class="fragment">
 <p><span class="math display">\[\partial_\alpha \equiv \frac{\partial}{\partial x^\alpha} = \left(\frac{1}{c}\frac{\partial}{\partial t}, \, \nabla\right), \qquad \partial^\alpha \equiv g^{\alpha\beta}\partial_\beta = \left(\frac{1}{c}\frac{\partial}{\partial t}, \, -\nabla\right)\]</span></p>
 </div>
 <div class="fragment">
 <div class="box-green">
-<p><strong>Operator d’Alembertian (<span class="math inline">\(\square\)</span>) sebagai Skalar Lorentz:</strong></p>
-<p><span class="math display">\[\square \equiv \partial_\alpha \partial^\alpha = \left(\frac{1}{c}\frac{\partial}{\partial t}\right)^2 - \nabla\cdot\nabla = \frac{1}{c^2}\frac{\partial^2}{\partial t^2} - \nabla^2\]</span></p>
-<p>Karena <span class="math inline">\(\square\)</span> merupakan kontraksi penuh dua 4-vektor, maka <span class="math inline">\(\square' = \square\)</span> di semua kerangka inersia—persamaan gelombang Maxwell otomatis invarian di bawah Transformasi Lorentz!</p>
+<p><strong>Operator <em>d’Alembertian</em> (<span class="math inline">\(\square\)</span>) sebagai Skalar Lorentz:</strong></p>
+<p><span class="math display">\[\square \equiv \partial_\alpha \partial^\alpha = g^{\alpha\beta}\partial_\alpha \partial_\beta = \left(\frac{1}{c}\frac{\partial}{\partial t}\right)^2 - \nabla\cdot\nabla = \frac{1}{c^2}\frac{\partial^2}{\partial t^2} - \nabla^2\]</span></p>
+<p>Karena <span class="math inline">\(\square\)</span> merupakan kontraksi penuh antara 4-vektor kovarian dan kontravarian, maka <span class="math inline">\(\square' = \square\)</span> di seluruh kerangka acuan inersial. Dengan demikian, persamaan gelombang elektromagnetik secara alami bersifat invarian di bawah Transformasi Lorentz.</p>
 </div>
 </div>
 </section>
 <section id="kovariansi-sumber-jalpha-masalah-potensial-aalpha" class="slide level2 center">
 <h2>4. Kovariansi Sumber (<span class="math inline">\(J^\alpha\)</span>) &amp; Masalah Potensial (<span class="math inline">\(A^\alpha\)</span>)</h2>
 <div class="columns">
-<div class="column" style="width:44%;">
+<div class="column" style="width:45%;">
 <div class="fragment">
 <p><strong>A. 4-Vektor Rapat Arus (<span class="math inline">\(J^\alpha\)</span>)</strong></p>
-<p>Karena muatan <span class="math inline">\(\delta q = \rho d^3x\)</span> invarian, <span class="math inline">\(\rho\)</span> dan <span class="math inline">\(\mathbf{J}\)</span> menyatu menjadi <span class="math inline">\(J^\alpha = (c\rho, \mathbf{J})\)</span> dengan hukum kekekalan muatan:</p>
+<p>Karena muatan listrik <span class="math inline">\(\delta q = \rho d^3x\)</span> bersifat invarian, <span class="math inline">\(\rho\)</span> dan <span class="math inline">\(\mathbf{J}\)</span> menyatu menjadi <span class="math inline">\(J^\alpha = (c\rho, \mathbf{J})\)</span> dengan persamaan kontinuitas:</p>
 <p><span class="math display">\[\partial_\alpha J^\alpha = \frac{\partial \rho}{\partial t} + \nabla \cdot \mathbf{J} = 0\]</span></p>
 </div>
-</div><div class="column" style="width:56%;">
+</div><div class="column" style="width:55%;">
 <div class="fragment">
-<p><strong>B. Persamaan Maxwell dalam Potensial <span class="math inline">\(A^\alpha = (\Phi, \mathbf{A})\)</span></strong></p>
-<p>Substitusi <span class="math inline">\(\mathbf{B} = \nabla \times \mathbf{A}\)</span> dan <span class="math inline">\(\mathbf{E} = -\nabla\Phi - \frac{1}{c}\frac{\partial \mathbf{A}}{\partial t}\)</span> ke Hukum Gauss &amp; Ampère-Maxwell menghasilkan:</p>
+<p><strong>B. Persamaan Maxwell dalam Potensial (<span class="math inline">\(A^\alpha\)</span>)</strong></p>
+<p>Substitusi <span class="math inline">\(\mathbf{B} = \nabla \times \mathbf{A}\)</span> dan <span class="math inline">\(\mathbf{E} = -\nabla\Phi - \frac{1}{c}\frac{\partial \mathbf{A}}{\partial t}\)</span> ke dalam Hukum Gauss dan Ampère–Maxwell (dengan identitas <span class="math inline">\(\nabla\times(\nabla\times\mathbf{A}) = \nabla(\nabla\cdot\mathbf{A}) - \nabla^2\mathbf{A}\)</span>) menghasilkan:</p>
 <p><span class="math display">\[\begin{aligned}
 \nabla^2 \Phi + \frac{1}{c}\frac{\partial}{\partial t}(\nabla \cdot \mathbf{A}) &amp;= -4\pi \rho \\
 \left(\nabla^2 - \frac{1}{c^2}\frac{\partial^2}{\partial t^2}\right)\mathbf{A} - \nabla\left(\nabla\cdot\mathbf{A} + \frac{1}{c}\frac{\partial \Phi}{\partial t}\right) &amp;= -\frac{4\pi}{c}\mathbf{J}
@@ -302,21 +309,21 @@ x' &amp;= \gamma(x - \beta ct), &amp; z' &amp;= z
 </div></div>
 <div class="fragment">
 <div class="box-red">
-<p><strong>Dua Masalah yang Muncul:</strong></p>
+<p><strong>Dua Permasalahan Matematis yang Muncul:</strong></p>
 <ol type="1">
-<li><strong>Terkopel:</strong> <span class="math inline">\(\Phi\)</span> dan <span class="math inline">\(\mathbf{A}\)</span> masih saling bercampur melalui suku <span class="math inline">\(\nabla\cdot\mathbf{A} + \frac{1}{c}\frac{\partial \Phi}{\partial t}\)</span> sehingga sulit diselesaikan.</li>
-<li><strong>Tidak Unik:</strong> Medan <span class="math inline">\((\mathbf{E}, \mathbf{B})\)</span> yang <strong>sama</strong> dapat dihasilkan oleh banyak <span class="math inline">\((\Phi, \mathbf{A})\)</span> yang <strong>berbeda</strong> melalui transformasi <span class="math inline">\(A'^\alpha = A^\alpha - \partial^\alpha \chi\)</span> (<span class="math inline">\(\Phi' = \Phi - \frac{1}{c}\partial_t\chi\)</span>, <span class="math inline">\(\mathbf{A}' = \mathbf{A} + \nabla\chi\)</span>).</li>
+<li><strong>Persamaan Terkopel:</strong> Potensial <span class="math inline">\(\Phi\)</span> dan <span class="math inline">\(\mathbf{A}\)</span> masih saling bergandeng melalui suku <span class="math inline">\(\nabla\cdot\mathbf{A} + \frac{1}{c}\frac{\partial \Phi}{\partial t}\)</span> sehingga menyulitkan solusi analitik.</li>
+<li><strong>Ketidakunikan (Invariansi Tera/<em>Gauge</em>):</strong> Medan fisis <span class="math inline">\((\mathbf{E}, \mathbf{B})\)</span> tetap tidak berubah di bawah transformasi tera <span class="math inline">\(A'^\alpha = A^\alpha - \partial^\alpha \chi\)</span> (<span class="math inline">\(\Phi' = \Phi - \frac{1}{c}\partial_t\chi\)</span>, <span class="math inline">\(\mathbf{A}' = \mathbf{A} + \nabla\chi\)</span>).</li>
 </ol>
 </div>
 </div>
 </section>
 <section id="solusi-syarat-tera-lorenz-partial_alpha-aalpha-0" class="slide level2 center">
 <h2>4. Solusi: Syarat Tera Lorenz (<span class="math inline">\(\partial_\alpha A^\alpha = 0\)</span>)</h2>
-<p>Karena pilihan fungsi <span class="math inline">\(\chi\)</span> tidak mengubah medan fisis <span class="math inline">\((\mathbf{E}, \mathbf{B})\)</span>, kita <strong>memanfaatkan kebebasan tersebut</strong> untuk memaksa suku pengganggu pada persamaan potensial menjadi nol:</p>
+<p>Mengingat fungsi skalar <span class="math inline">\(\chi\)</span> tidak mengubah medan fisis <span class="math inline">\((\mathbf{E}, \mathbf{B})\)</span>, kebebasan tera tersebut dapat dimanfaatkan untuk melenyapkan suku penggandeng pada persamaan potensial:</p>
 <div class="fragment">
 <div class="box-green">
-<p><strong>Syarat Tera Lorenz (dalam bentuk 4-vektor):</strong></p>
-<p><span class="math display">\[\partial_\alpha A^\alpha = \frac{1}{c}\frac{\partial \Phi}{\partial t} + \nabla \cdot \mathbf{A} = 0 \implies \begin{cases} \square \Phi = 4\pi \rho \\ \square \mathbf{A} = \frac{4\pi}{c}\mathbf{J} \end{cases} \iff \square A^\alpha = \frac{4\pi}{c} J^\alpha\]</span></p>
+<p><strong>Dekoupling melalui Syarat Tera Lorenz:</strong></p>
+<p><span class="math display">\[\partial_\alpha A^\alpha = \frac{1}{c}\frac{\partial \Phi}{\partial t} + \nabla \cdot \mathbf{A} = 0 \implies \begin{cases} \left(\frac{1}{c^2}\partial_t^2 - \nabla^2\right)\Phi = 4\pi \rho \\ \left(\frac{1}{c^2}\partial_t^2 - \nabla^2\right)\mathbf{A} = \frac{4\pi}{c}\mathbf{J} \end{cases} \iff \square A^\alpha = \frac{4\pi}{c} J^\alpha\]</span></p>
 </div>
 </div>
 <div class="columns">
@@ -325,64 +332,64 @@ x' &amp;= \gamma(x - \beta ct), &amp; z' &amp;= z
 <div class="box-blue">
 <p><strong>Keunggulan Syarat Tera Lorenz:</strong></p>
 <ul>
-<li><strong>Langsung Terpisah:</strong> <span class="math inline">\(\Phi\)</span> dan <span class="math inline">\(\mathbf{A}\)</span> terlepas menjadi satu persamaan gelombang kovarian <span class="math inline">\(\square A^\alpha = \frac{4\pi}{c}J^\alpha\)</span>.</li>
-<li><strong>Invarian Lorentz:</strong> <span class="math inline">\(\partial_\alpha A^\alpha = 0\)</span> adalah <strong>skalar Lorentz</strong> (berlaku di semua kerangka), berbeda dengan Tera Coulomb (<span class="math inline">\(\nabla\cdot\mathbf{A}=0\)</span>) yang bergantung kerangka acuan.</li>
+<li><strong>Pemisahan Sempurna:</strong> <span class="math inline">\(\Phi\)</span> dan <span class="math inline">\(\mathbf{A}\)</span> terurai menjadi satu persamaan gelombang non-homogen yang simetris dan kovarian: <span class="math inline">\(\square A^\alpha = \frac{4\pi}{c}J^\alpha\)</span>.</li>
+<li><strong>Invarian Lorentz:</strong> <span class="math inline">\(\partial_\alpha A^\alpha = 0\)</span> merupakan <strong>skalar Lorentz</strong> (berlaku di semua kerangka inersial), berbeda dengan Tera Coulomb (<span class="math inline">\(\nabla\cdot\mathbf{A}=0\)</span>) yang bergantung pada kerangka acuan.</li>
 </ul>
 </div>
 </div>
 </div><div class="column" style="width:46%;">
 <div class="fragment">
 <div class="box-amber">
-<p><strong>Selalu Dapat Dipenuhi:</strong></p>
-<p>Jika <span class="math inline">\(A^\alpha\)</span> awal belum memenuhi <span class="math inline">\(\partial_\alpha A^\alpha = 0\)</span>, cukup pilih <span class="math inline">\(\chi\)</span> yang memenuhi:</p>
-<p><span class="math display">\[\square \chi = \partial_\alpha A^\alpha \implies \partial_\alpha A'^\alpha = 0\]</span></p>
+<p><strong>Jaminan Eksistensi Tera:</strong></p>
+<p>Apabila <span class="math inline">\(A^\alpha\)</span> awal belum memenuhi <span class="math inline">\(\partial_\alpha A^\alpha = 0\)</span>, selalu dapat dipilih fungsi <span class="math inline">\(\chi\)</span> yang memenuhi persamaan gelombang:</p>
+<p><span class="math display">\[\square \chi = \partial_\alpha A^\alpha \implies \partial_\alpha A'^\alpha = \partial_\alpha A^\alpha - \square\chi = 0\]</span></p>
 </div>
 </div>
 </div></div>
 </section>
-<section id="bagaimana-penyatuan-medan-mathbfe-dan-mathbfb-terjadi" class="slide level2 center">
-<h2>5. Bagaimana Penyatuan Medan <span class="math inline">\(\mathbf{E}\)</span> dan <span class="math inline">\(\mathbf{B}\)</span> Terjadi?</h2>
-<p>Mengapa <span class="math inline">\(\mathbf{E}\)</span> dan <span class="math inline">\(\mathbf{B}\)</span> tidak bisa menjadi dua 4-vektor terpisah, melainkan harus menyatu menjadi satu tensor?</p>
+<section id="penyatuan-medan-mathbfe-dan-mathbfb-dalam-tensor-falphabeta" class="slide level2 center">
+<h2>5. Penyatuan Medan <span class="math inline">\(\mathbf{E}\)</span> dan <span class="math inline">\(\mathbf{B}\)</span> dalam Tensor <span class="math inline">\(F^{\alpha\beta}\)</span></h2>
+<p>Mengapa medan listrik <span class="math inline">\(\mathbf{E}\)</span> dan medan magnetik <span class="math inline">\(\mathbf{B}\)</span> tidak dapat direpresentasikan sebagai dua 4-vektor terpisah, melainkan harus menyatu dalam satu tensor?</p>
 <div class="columns">
-<div class="column" style="width:50%;">
+<div class="column" style="width:48%;">
 <div class="fragment">
 <div class="box-blue">
-<p><strong>1. Argumen Derajat Kebebasan (DOF):</strong></p>
+<p><strong>1. Argumen Derajat Kebebasan:</strong></p>
 <ul>
-<li>Sebuah 4-vektor di ruang-waktu 4D hanya memiliki <strong>4 komponen</strong> (seperti <span class="math inline">\(x^\alpha, J^\alpha, A^\alpha\)</span>).</li>
-<li>Medan elektromagnetik terdiri dari <span class="math inline">\(\mathbf{E} = (E_x, E_y, E_z)\)</span> dan <span class="math inline">\(\mathbf{B} = (B_x, B_y, B_z)\)</span>, total <strong>6 komponen bebas</strong>.</li>
-<li><strong>Solusi Matematis:</strong> Tensor antisimetris orde-2 (<span class="math inline">\(F^{\alpha\beta} = -F^{\beta\alpha}\)</span>) di 4D memiliki tepat <span class="math inline">\(\binom{4}{2} = \mathbf{6}\)</span> <strong>komponen bebas</strong>!</li>
+<li>Suatu 4-vektor di ruang-waktu 4D hanya memiliki <strong>4 komponen</strong> (seperti <span class="math inline">\(x^\alpha, J^\alpha, A^\alpha\)</span>).</li>
+<li>Medan elektromagnetik tersusun atas <span class="math inline">\(\mathbf{E} = (E_1, E_2, E_3)\)</span> dan <span class="math inline">\(\mathbf{B} = (B_1, B_2, B_3)\)</span> dengan total <strong>6 komponen bebas</strong>.</li>
+<li><strong>Struktur Matematis:</strong> Tensor antisimetris orde-2 (<span class="math inline">\(F^{\alpha\beta} = -F^{\beta\alpha}\)</span>) di ruang 4D memiliki tepat <span class="math inline">\(\binom{4}{2} = \mathbf{6}\)</span> <strong>komponen independen</strong>.</li>
 </ul>
 </div>
 </div>
-</div><div class="column" style="width:50%;">
+</div><div class="column" style="width:52%;">
 <div class="fragment">
 <div class="box-green">
-<p><strong>2. Mekanisme Penyatuan dari 4-Potensial:</strong></p>
+<p><strong>2. Konstruksi Eksplisit dari 4-Potensial:</strong></p>
 <p>Mengambil turunan antisimetris dari <span class="math inline">\(A^\alpha = (\Phi, \mathbf{A})\)</span>:</p>
-<p><span class="math display">\[F^{\alpha\beta} = \partial^\alpha A^\beta - \partial^\beta A^\alpha\]</span></p>
+<p><span class="math display">\[F^{\alpha\beta} \equiv \partial^\alpha A^\beta - \partial^\beta A^\alpha\]</span></p>
 <ul>
-<li><strong>Komponen Ruang–Waktu (<span class="math inline">\(F^{i0}\)</span>):</strong> Menghasilkan medan listrik <span class="math inline">\(E_i = -\partial_i \Phi - \frac{1}{c}\partial_t A_i\)</span>.</li>
-<li><strong>Komponen Ruang–Ruang (<span class="math inline">\(F^{ij}\)</span>):</strong> Menghasilkan medan magnet <span class="math inline">\(B_k = (\nabla \times \mathbf{A})_k = -\frac{1}{2}\epsilon_{ijk} F^{ij}\)</span>.</li>
+<li><strong>Komponen Ruang–Waktu (<span class="math inline">\(F^{i0}\)</span>):</strong> <span class="math display">\[F^{i0} = \partial^i A^0 - \partial^0 A^i = -\frac{\partial \Phi}{\partial x_i} - \frac{1}{c}\frac{\partial A_i}{\partial t} = E_i\]</span></li>
+<li><strong>Komponen Ruang–Ruang (<span class="math inline">\(F^{ij}\)</span>):</strong> <span class="math display">\[F^{ij} = -\frac{\partial A_j}{\partial x_i} + \frac{\partial A_i}{\partial x_j} = -\epsilon_{ijk}(\nabla \times \mathbf{A})_k = -\epsilon_{ijk} B_k\]</span></li>
 </ul>
 </div>
 </div>
 </div></div>
 <div class="fragment">
-<p><strong>Makna Fisik:</strong> Di bawah rotasi 4D (Lorentz Boost), sumbu waktu dan ruang tercampur, sehingga komponen <span class="math inline">\(F^{i0}\)</span> (<span class="math inline">\(\mathbf{E}\)</span>) dan <span class="math inline">\(F^{ij}\)</span> (<span class="math inline">\(\mathbf{B}\)</span>) <strong>saling bertukar peran</strong>—keduanya adalah proyeksi berbeda dari satu objek fisis tunggal <span class="math inline">\(F^{\alpha\beta}\)</span>.</p>
+<p><strong>Makna Fisis:</strong> Di bawah Transformasi Lorentz (rotasi hiperbolik di ruang-waktu 4D), sumbu waktu dan ruang saling bercampur sehingga komponen <span class="math inline">\(F^{i0}\)</span> (<span class="math inline">\(\mathbf{E}\)</span>) dan <span class="math inline">\(F^{ij}\)</span> (<span class="math inline">\(\mathbf{B}\)</span>) bertransformasi satu sama lain sebagai proyeksi berbeda dari satu entitas fisis tunggal <span class="math inline">\(F^{\alpha\beta}\)</span>.</p>
 </div>
 </section>
-<section id="tensor-kekuatan-medan-falphabeta-dan-tildefalphabeta" class="slide level2 center">
-<h2>5. Tensor Kekuatan Medan (<span class="math inline">\(F^{\alpha\beta}\)</span> dan <span class="math inline">\(\tilde{F}^{\alpha\beta}\)</span>)</h2>
-<p>Dari definisi <span class="math inline">\(F^{\alpha\beta} = \partial^\alpha A^\beta - \partial^\beta A^\alpha\)</span>, kita susun matriks antisimetris <span class="math inline">\(4\times 4\)</span> beserta tensor dualnya:</p>
+<section id="matriks-tensor-medan-falphabeta-dan-tensor-dual-tildefalphabeta" class="slide level2 center">
+<h2>5. Matriks Tensor Medan (<span class="math inline">\(F^{\alpha\beta}\)</span>) dan Tensor Dual (<span class="math inline">\(\tilde{F}^{\alpha\beta}\)</span>)</h2>
+<p>Dari hasil penjabaran komponen <span class="math inline">\(F^{i0} = E_i\)</span> dan <span class="math inline">\(F^{ij} = -\epsilon_{ijk} B_k\)</span>, tersusun matriks antisimetris <span class="math inline">\(4\times 4\)</span> beserta tensor dualnya (dengan konvensi Levi-Civita <span class="math inline">\(\epsilon^{0123} = +1\)</span>):</p>
 <div class="columns">
 <div class="column" style="width:50%;">
 <div class="fragment">
-<p><strong>Tensor Medan Biasa (<span class="math inline">\(F^{\alpha\beta}\)</span>):</strong></p>
+<p><strong>Tensor Medan Elektromagnetik (<span class="math inline">\(F^{\alpha\beta}\)</span>):</strong></p>
 <div class="small-math">
 <p><span class="math display">\[F^{\alpha\beta} = \begin{pmatrix} 0 &amp; -E_x &amp; -E_y &amp; -E_z \\ E_x &amp; 0 &amp; -B_z &amp; B_y \\ E_y &amp; B_z &amp; 0 &amp; -B_x \\ E_z &amp; -B_y &amp; B_x &amp; 0 \end{pmatrix}\]</span></p>
 </div>
-<p><em>(Bentuk kovarian <span class="math inline">\(F_{\alpha\beta} = g_{\alpha\mu}g_{\beta\nu}F^{\mu\nu}\)</span> membalik tanda <span class="math inline">\(\mathbf{E} \to -\mathbf{E}\)</span>)</em></p>
+<p><em>(Bentuk kovarian <span class="math inline">\(F_{\alpha\beta} = g_{\alpha\mu}g_{\beta\nu}F^{\mu\nu}\)</span> membalik tanda komponen ruang–waktu: <span class="math inline">\(\mathbf{E} \to -\mathbf{E}\)</span>)</em></p>
 </div>
 </div><div class="column" style="width:50%;">
 <div class="fragment">
@@ -390,13 +397,13 @@ x' &amp;= \gamma(x - \beta ct), &amp; z' &amp;= z
 <div class="small-math">
 <p><span class="math display">\[\tilde{F}^{\alpha\beta} = \begin{pmatrix} 0 &amp; -B_x &amp; -B_y &amp; -B_z \\ B_x &amp; 0 &amp; E_z &amp; -E_y \\ B_y &amp; -E_z &amp; 0 &amp; E_x \\ B_z &amp; E_y &amp; -E_x &amp; 0 \end{pmatrix}\]</span></p>
 </div>
-<p><em>(Transformasi Dualitas: <span class="math inline">\(\mathbf{E} \to \mathbf{B}, \; \mathbf{B} \to -\mathbf{E}\)</span>)</em></p>
+<p><em>(Mengikuti transformasi dualitas elektromagnetik: <span class="math inline">\(\mathbf{E} \to \mathbf{B}, \; \mathbf{B} \to -\mathbf{E}\)</span>)</em></p>
 </div>
 </div></div>
 </section>
-<section id="mengapa-ada-f-dan-tildef-12-formulasi-hanya-dengan-f" class="slide level2 center">
-<h2>6. Mengapa Ada <span class="math inline">\(F\)</span> dan <span class="math inline">\(\tilde{F}\)</span>? (1/2): Formulasi Hanya dengan <span class="math inline">\(F\)</span></h2>
-<p>Sebenarnya, <strong>seluruh informasi</strong> Persamaan Maxwell Homogen sudah terkandung di dalam <span class="math inline">\(F_{\alpha\beta}\)</span> saja tanpa perlu <span class="math inline">\(\tilde{F}^{\alpha\beta}\)</span> melalui <strong>Identitas Bianchi (jumlah siklik 3 indeks)</strong>:</p>
+<section id="mengapa-diperlukan-falphabeta-dan-tildefalphabeta-12-identitas-bianchi" class="slide level2 center">
+<h2>6. Mengapa Diperlukan <span class="math inline">\(F^{\alpha\beta}\)</span> dan <span class="math inline">\(\tilde{F}^{\alpha\beta}\)</span>? (1/2): Identitas Bianchi</h2>
+<p>Secara prinsip, seluruh informasi Persamaan Maxwell Homogen telah terkandung di dalam <span class="math inline">\(F_{\alpha\beta}\)</span> saja tanpa melibatkan <span class="math inline">\(\tilde{F}^{\alpha\beta}\)</span> melalui <strong>Identitas Bianchi (penjumlahan siklik tiga indeks)</strong>:</p>
 <div class="fragment">
 <p><span class="math display">\[\partial_\alpha F_{\beta\gamma} + \partial_\beta F_{\gamma\alpha} + \partial_\gamma F_{\alpha\beta} = 0 \qquad \left(\text{atau } \partial_{[\alpha} F_{\beta\gamma]} = 0\right)\]</span></p>
 </div>
@@ -404,14 +411,14 @@ x' &amp;= \gamma(x - \beta ct), &amp; z' &amp;= z
 <div class="column" style="width:48%;">
 <div class="fragment">
 <div class="box-blue">
-<p><strong>Bukti Identitas dari Potensial <span class="math inline">\(A_\alpha\)</span>:</strong></p>
-<p>Substitusi <span class="math inline">\(F_{\alpha\beta} = \partial_\alpha A_\beta - \partial_\beta A_\alpha\)</span>:</p>
+<p><strong>Pembuktian Identitas dari Potensial <span class="math inline">\(A_\alpha\)</span>:</strong></p>
+<p>Substitusi <span class="math inline">\(F_{\alpha\beta} = \partial_\alpha A_\beta - \partial_\beta A_\alpha\)</span> menghasilkan:</p>
 <p><span class="math display">\[\begin{aligned}
 &amp;\partial_\alpha(\partial_\beta A_\gamma - \partial_\gamma A_\beta) \\
 + &amp;\partial_\beta(\partial_\gamma A_\alpha - \partial_\alpha A_\gamma) \\
 + &amp;\partial_\gamma(\partial_\alpha A_\beta - \partial_\beta A_\alpha) \equiv 0
 \end{aligned}\]</span></p>
-<p>karena turunan parsial saling komutatif (<span class="math inline">\(\partial_\alpha\partial_\beta = \partial_\beta\partial_\alpha\)</span>).</p>
+<p>Identitas ini terpenuhi secara otomatis akibat sifat komutatif turunan parsial (<span class="math inline">\(\partial_\alpha\partial_\beta = \partial_\beta\partial_\alpha\)</span>).</p>
 </div>
 </div>
 </div><div class="column" style="width:52%;">
@@ -419,42 +426,42 @@ x' &amp;= \gamma(x - \beta ct), &amp; z' &amp;= z
 <div class="box-green">
 <p><strong>Ekstraksi Persamaan Maxwell Homogen:</strong></p>
 <ul>
-<li><strong>Untuk <span class="math inline">\((\alpha,\beta,\gamma) = (1,2,3)\)</span>:</strong> <span class="math display">\[\partial_1 F_{23} + \partial_2 F_{31} + \partial_3 F_{12} = -\left(\frac{\partial B_x}{\partial x} + \frac{\partial B_y}{\partial y} + \frac{\partial B_z}{\partial z}\right) = 0\]</span> <span class="math inline">\(\implies \nabla \cdot \mathbf{B} = 0\)</span> <em>(Gauss Magnetik)</em>.</li>
-<li><strong>Untuk <span class="math inline">\((\alpha,\beta,\gamma) = (0,1,2)\)</span>:</strong> <span class="math display">\[\partial_0 F_{12} + \partial_1 F_{20} + \partial_2 F_{01} = -\frac{1}{c}\frac{\partial B_z}{\partial t} - \frac{\partial E_y}{\partial x} + \frac{\partial E_x}{\partial y} = 0\]</span> <span class="math inline">\(\implies \nabla \times \mathbf{E} + \frac{1}{c}\frac{\partial\mathbf{B}}{\partial t} = 0\)</span> <em>(Hukum Faraday)</em>.</li>
+<li><strong>Untuk <span class="math inline">\((\alpha,\beta,\gamma) = (1,2,3)\)</span>:</strong> <span class="math display">\[\partial_1 F_{23} + \partial_2 F_{31} + \partial_3 F_{12} = -\left(\frac{\partial B_x}{\partial x} + \frac{\partial B_y}{\partial y} + \frac{\partial B_z}{\partial z}\right) = 0\]</span> <span class="math inline">\(\implies \nabla \cdot \mathbf{B} = 0\)</span> <em>(Hukum Gauss Magnetik)</em>.</li>
+<li><strong>Untuk <span class="math inline">\((\alpha,\beta,\gamma) = (0,1,2)\)</span>:</strong> <span class="math display">\[\partial_0 F_{12} + \partial_1 F_{20} + \partial_2 F_{01} = -\frac{1}{c}\frac{\partial B_z}{\partial t} - \frac{\partial E_y}{\partial x} + \frac{\partial E_x}{\partial y} = 0\]</span> <span class="math inline">\(\implies \nabla \times \mathbf{E} + \frac{1}{c}\frac{\partial\mathbf{B}}{\partial t} = 0\)</span> <em>(Hukum Induksi Faraday)</em>.</li>
 </ul>
 </div>
 </div>
 </div></div>
 </section>
-<section id="mengapa-ada-f-dan-tildef-22-ekuivalensi-alasan-praktis" class="slide level2 center">
-<h2>6. Mengapa Ada <span class="math inline">\(F\)</span> dan <span class="math inline">\(\tilde{F}\)</span>? (2/2): Ekuivalensi &amp; Alasan Praktis</h2>
-<p>Mengontraksikan identitas siklik <span class="math inline">\(\partial_{[\alpha} F_{\beta\gamma]} = 0\)</span> dengan tensor Levi-Civita 4D <span class="math inline">\(\frac{1}{2}\epsilon^{\delta\alpha\beta\gamma}\)</span> mereduksi 3 suku menjadi <strong>1 suku divergensi</strong>:</p>
+<section id="mengapa-diperlukan-falphabeta-dan-tildefalphabeta-22-ekuivalensi-keunggulan" class="slide level2 center">
+<h2>6. Mengapa Diperlukan <span class="math inline">\(F^{\alpha\beta}\)</span> dan <span class="math inline">\(\tilde{F}^{\alpha\beta}\)</span>? (2/2): Ekuivalensi &amp; Keunggulan</h2>
+<p>Mengontraksikan identitas siklik <span class="math inline">\(\partial_{[\alpha} F_{\beta\gamma]} = 0\)</span> dengan tensor Levi-Civita 4D <span class="math inline">\(\frac{1}{2}\epsilon^{\delta\alpha\beta\gamma}\)</span> mereduksi tiga suku menjadi <strong>satu suku divergensi</strong>:</p>
 <div class="fragment">
 <p><span class="math display">\[\frac{1}{2}\epsilon^{\delta\alpha\beta\gamma}\left(\partial_\alpha F_{\beta\gamma} + \partial_\beta F_{\gamma\alpha} + \partial_\gamma F_{\alpha\beta}\right) = 0 \iff \partial_\alpha \underbrace{\left(\frac{1}{2}\epsilon^{\alpha\delta\beta\gamma} F_{\beta\gamma}\right)}_{\tilde{F}^{\alpha\delta}} = 0 \implies \partial_\alpha \tilde{F}^{\alpha\beta} = 0\]</span></p>
 </div>
 <div class="fragment">
 <div class="box-amber">
-<p><strong>Lalu mengapa <span class="math inline">\(\tilde{F}^{\alpha\beta}\)</span> tetap digunakan padahal secara prinsip <span class="math inline">\(F^{\alpha\beta}\)</span> saja sudah cukup?</strong></p>
+<p><strong>Signifikansi Penggunaan <span class="math inline">\(\tilde{F}^{\alpha\beta}\)</span> dalam Formulasi Kovarian:</strong></p>
 <ol type="1">
-<li><strong>Simetri &amp; Kerapian Notasi:</strong> Mengubah persamaan tensor orde-3 bertiga suku (<span class="math inline">\(\partial_{[\alpha}F_{\beta\gamma]}=0\)</span>) menjadi divergensi 4-vektor orde-1 yang simetris sempurna dengan persamaan inhomogen: <span class="math display">\[\partial_\alpha F^{\alpha\beta} = \frac{4\pi}{c}J^\beta \qquad \longleftrightarrow \qquad \partial_\alpha \tilde{F}^{\alpha\beta} = 0\]</span></li>
-<li><strong>Dualiti Elektromagnetik &amp; Monopol Magnetik:</strong> Memperlihatkan simetri pertukaran <span class="math inline">\(\mathbf{E} \leftrightarrow \mathbf{B}\)</span>. Jika monopol magnet (<span class="math inline">\(J_m^\beta\)</span>) eksis, persamaan homogen langsung menjadi <span class="math inline">\(\partial_\alpha \tilde{F}^{\alpha\beta} = \frac{4\pi}{c}J_m^\beta\)</span>.</li>
-<li><strong>Konstruksi Invarian Pseudoskalar:</strong> Memungkinkan penulisan invarian kedua <span class="math inline">\(F_{\alpha\beta}\tilde{F}^{\alpha\beta} = -4(\mathbf{E}\cdot\mathbf{B})\)</span> sebagai kontraksi langsung dua tensor orde-2.</li>
+<li><strong>Simetri dan Kerapian Notasi:</strong> Mengubah persamaan tensor orde-3 tiga suku (<span class="math inline">\(\partial_{[\alpha}F_{\beta\gamma]}=0\)</span>) menjadi divergensi 4-vektor yang simetris sempurna dengan persamaan inhomogen: <span class="math display">\[\partial_\alpha F^{\alpha\beta} = \frac{4\pi}{c}J^\beta \qquad \longleftrightarrow \qquad \partial_\alpha \tilde{F}^{\alpha\beta} = 0\]</span></li>
+<li><strong>Dualitas Elektromagnetik &amp; Monopol Magnetik:</strong> Memperjelas simetri pertukaran <span class="math inline">\(\mathbf{E} \leftrightarrow \mathbf{B}\)</span>. Jika arus monopol magnetik (<span class="math inline">\(J_m^\beta\)</span>) eksis, persamaan homogen langsung termodifikasi menjadi <span class="math inline">\(\partial_\alpha \tilde{F}^{\alpha\beta} = \frac{4\pi}{c}J_m^\beta\)</span>.</li>
+<li><strong>Konstruksi Invarian Pseudoskalar:</strong> Memungkinkan perumusan invarian kedua <span class="math inline">\(F_{\alpha\beta}\tilde{F}^{\alpha\beta} = -4(\mathbf{E}\cdot\mathbf{B})\)</span> sebagai kontraksi langsung dua tensor orde-2.</li>
 </ol>
 </div>
 </div>
 </section>
 <section id="ringkasan-persamaan-maxwell-kovarian-gaya-lorentz" class="slide level2 center">
 <h2>6. Ringkasan Persamaan Maxwell Kovarian &amp; Gaya Lorentz</h2>
-<p>Keempat persamaan Maxwell klasik (satuan Gaussian) diringkas menjadi dua persamaan 4-tensor kovarian:</p>
+<p>Keempat persamaan Maxwell klasik (dalam satuan Gaussian) terangkum secara kompak dalam dua persamaan 4-tensor kovarian:</p>
 <div class="columns">
 <div class="column" style="width:50%;">
 <div class="fragment">
 <div class="box-blue">
-<p><strong>1. Persamaan Inhomogen (Ada Sumber)</strong></p>
+<p><strong>1. Persamaan Inhomogen (Dengan Sumber)</strong></p>
 <p><span class="math display">\[\partial_\alpha F^{\alpha\beta} = \frac{4\pi}{c} J^\beta\]</span></p>
 <ul>
-<li><span class="math inline">\(\beta = 0 \implies \nabla \cdot \mathbf{E} = 4\pi\rho\)</span> <em>(Gauss)</em></li>
-<li><span class="math inline">\(\beta = i \implies \nabla \times \mathbf{B} - \frac{1}{c}\frac{\partial\mathbf{E}}{\partial t} = \frac{4\pi}{c}\mathbf{J}\)</span> <em>(Ampère-Maxwell)</em></li>
+<li><span class="math inline">\(\beta = 0 \implies \partial_i F^{i0} = \nabla \cdot \mathbf{E} = 4\pi\rho\)</span> <em>(Gauss)</em></li>
+<li><span class="math inline">\(\beta = i \implies \nabla \times \mathbf{B} - \frac{1}{c}\frac{\partial\mathbf{E}}{\partial t} = \frac{4\pi}{c}\mathbf{J}\)</span> <em>(Ampère–Maxwell)</em></li>
 </ul>
 </div>
 </div>
@@ -464,28 +471,38 @@ x' &amp;= \gamma(x - \beta ct), &amp; z' &amp;= z
 <p><strong>2. Persamaan Homogen (Tanpa Sumber)</strong></p>
 <p><span class="math display">\[\partial_\alpha \tilde{F}^{\alpha\beta} = 0 \iff \partial_{[\alpha}F_{\beta\gamma]} = 0\]</span></p>
 <ul>
-<li><span class="math inline">\(\beta = 0 \implies \nabla \cdot \mathbf{B} = 0\)</span> <em>(Tiada Monopol)</em></li>
+<li><span class="math inline">\(\beta = 0 \implies \nabla \cdot \mathbf{B} = 0\)</span> <em>(Ketiadaan Monopol)</em></li>
 <li><span class="math inline">\(\beta = i \implies \nabla \times \mathbf{E} + \frac{1}{c}\frac{\partial\mathbf{B}}{\partial t} = 0\)</span> <em>(Faraday)</em></li>
 </ul>
 </div>
 </div>
 </div></div>
 <div class="fragment">
-<p><strong>Persamaan Gaya Lorentz Kovarian:</strong></p>
-<p><span class="math display">\[\frac{dp^\alpha}{d\tau} = m \frac{dU^\alpha}{d\tau} = \frac{q}{c} F^{\alpha\beta} U_\beta\]</span></p>
+<div class="box-amber">
+<p><strong>Persamaan Gaya Lorentz Kovarian &amp; Reduksi 3-Dimensinya:</strong></p>
+<p><span class="math display">\[\frac{dp^\alpha}{d\tau} = m \frac{dU^\alpha}{d\tau} = \frac{q}{c} F^{\alpha\beta} U_\beta \qquad \left(\text{dengan } U_\beta = \gamma(c, -\mathbf{v}), \; d\tau = \frac{dt}{\gamma}\right)\]</span></p>
+<ul>
+<li>Komponen <span class="math inline">\(\alpha = 0\)</span>: <span class="math inline">\(\gamma \frac{d(E/c)}{dt} = \frac{q}{c} F^{0i}U_i = \gamma \frac{q}{c}(\mathbf{E}\cdot\mathbf{v}) \implies \frac{dE}{dt} = q\,\mathbf{v}\cdot\mathbf{E}\)</span> <em>(Laju Kerja)</em>.</li>
+<li>Komponen <span class="math inline">\(\alpha = i\)</span>: <span class="math inline">\(\gamma \frac{dp_i}{dt} = \frac{q}{c}(F^{i0}U_0 + F^{ij}U_j) \implies \frac{d\mathbf{p}}{dt} = q\left(\mathbf{E} + \frac{\mathbf{v}}{c}\times\mathbf{B}\right)\)</span> <em>(Gaya Lorentz)</em>.</li>
+</ul>
+</div>
 </div>
 </section>
 <section id="transformasi-medan-mathbfe-dan-mathbfb-12-boost-sumbu-x_1" class="slide level2 center">
-<h2>7. Transformasi Medan <span class="math inline">\(\mathbf{E}\)</span> dan <span class="math inline">\(\mathbf{B}\)</span> (1/2): Boost Sumbu-<span class="math inline">\(x_1\)</span></h2>
-<p>Karena <span class="math inline">\(F^{\alpha\beta}\)</span> adalah tensor orde-2, ia bertransformasi melalui perkalian matriks <span class="math inline">\(F'^{\alpha\beta} = \Lambda^\alpha{}_\gamma \Lambda^\beta{}_\delta F^{\gamma\delta}\)</span> (atau <span class="math inline">\(F' = \Lambda F \Lambda^T\)</span>):</p>
+<h2>7. Transformasi Medan <span class="math inline">\(\mathbf{E}\)</span> dan <span class="math inline">\(\mathbf{B}\)</span> (1/2): <em>Boost</em> Sumbu-<span class="math inline">\(x_1\)</span></h2>
+<p>Karena <span class="math inline">\(F^{\alpha\beta}\)</span> adalah tensor kontravarian orde-2, ia bertransformasi mengikuti aturan <span class="math inline">\(F'^{\alpha\beta} = \Lambda^\alpha{}_\gamma \Lambda^\beta{}_\delta F^{\gamma\delta}\)</span>, atau dalam notasi matriks <span class="math inline">\(F' = \Lambda F \Lambda^T\)</span> (dengan <span class="math inline">\(\Lambda^T = \Lambda\)</span>):</p>
 <div class="fragment">
 <div class="small-math">
 <p><span class="math display">\[F' = \begin{pmatrix} \gamma &amp; -\gamma\beta &amp; 0 &amp; 0 \\ -\gamma\beta &amp; \gamma &amp; 0 &amp; 0 \\ 0 &amp; 0 &amp; 1 &amp; 0 \\ 0 &amp; 0 &amp; 0 &amp; 1 \end{pmatrix} \begin{pmatrix} 0 &amp; -E_1 &amp; -E_2 &amp; -E_3 \\ E_1 &amp; 0 &amp; -B_3 &amp; B_2 \\ E_2 &amp; B_3 &amp; 0 &amp; -B_1 \\ E_3 &amp; -B_2 &amp; B_1 &amp; 0 \end{pmatrix} \begin{pmatrix} \gamma &amp; -\gamma\beta &amp; 0 &amp; 0 \\ -\gamma\beta &amp; \gamma &amp; 0 &amp; 0 \\ 0 &amp; 0 &amp; 1 &amp; 0 \\ 0 &amp; 0 &amp; 0 &amp; 1 \end{pmatrix}\]</span></p>
 </div>
 </div>
 <div class="fragment">
+<p>Sebagai ilustrasi, perkalian indeks untuk komponen longitudinal <span class="math inline">\(E'_1 = F'^{10}\)</span> dan transversal <span class="math inline">\(E'_2 = F'^{20}\)</span> memberikan:</p>
+<p><span class="math display">\[F'^{10} = \gamma^2 F^{10} - \gamma^2\beta^2 F^{01} = \gamma^2(1-\beta^2)E_1 = E_1, \qquad F'^{20} = \gamma F^{20} - \gamma\beta F^{21} = \gamma(E_2 - \beta B_3)\]</span></p>
+</div>
+<div class="fragment">
 <div class="box-blue">
-<p><strong>Hasil Komponen untuk Boost Sejajar Sumbu-<span class="math inline">\(x_1\)</span>:</strong></p>
+<p><strong>Himpunan Lengkap Komponen Medan untuk <em>Boost</em> Sejajar Sumbu-<span class="math inline">\(x_1\)</span>:</strong></p>
 <p><span class="math display">\[\begin{aligned}
 E'_1 &amp;= E_1, &amp; E'_2 &amp;= \gamma(E_2 - \beta B_3), &amp; E'_3 &amp;= \gamma(E_3 + \beta B_2) \\
 B'_1 &amp;= B_1, &amp; B'_2 &amp;= \gamma(B_2 + \beta E_3), &amp; B'_3 &amp;= \gamma(B_3 - \beta E_2)
@@ -495,26 +512,26 @@ B'_1 &amp;= B_1, &amp; B'_2 &amp;= \gamma(B_2 + \beta E_3), &amp; B'_3 &amp;= \g
 </section>
 <section id="transformasi-medan-mathbfe-dan-mathbfb-22-bentuk-vektorial-umum" class="slide level2 center">
 <h2>7. Transformasi Medan <span class="math inline">\(\mathbf{E}\)</span> dan <span class="math inline">\(\mathbf{B}\)</span> (2/2): Bentuk Vektorial Umum</h2>
-<p>Untuk kecepatan relatif sembarang <span class="math inline">\(\mathbf{v} = c\boldsymbol{\beta}\)</span>, kita pisahkan medan menjadi komponen sejajar (<span class="math inline">\(\parallel\)</span>) dan tegak lurus (<span class="math inline">\(\perp\)</span>) terhadap <span class="math inline">\(\boldsymbol{\beta}\)</span>:</p>
+<p>Untuk kecepatan relatif sembarang <span class="math inline">\(\mathbf{v} = c\boldsymbol{\beta}\)</span>, medan diuraikan menjadi komponen sejajar (<span class="math inline">\(\parallel\)</span>) dan tegak lurus (<span class="math inline">\(\perp\)</span>) terhadap arah gerak <span class="math inline">\(\boldsymbol{\beta}\)</span>:</p>
 <div class="fragment">
 <p><span class="math display">\[\mathbf{E}'_\parallel = \mathbf{E}_\parallel, \qquad \mathbf{E}'_\perp = \gamma(\mathbf{E}_\perp + \boldsymbol{\beta} \times \mathbf{B})\]</span> <span class="math display">\[\mathbf{B}'_\parallel = \mathbf{B}_\parallel, \qquad \mathbf{B}'_\perp = \gamma(\mathbf{B}_\perp - \boldsymbol{\beta} \times \mathbf{E})\]</span></p>
 </div>
 <div class="fragment">
-<p>Dengan mensubstitusikan <span class="math inline">\(\mathbf{E}_\parallel = \frac{(\boldsymbol{\beta}\cdot\mathbf{E})}{\beta^2}\boldsymbol{\beta}\)</span> dan <span class="math inline">\(\mathbf{E}_\perp = \mathbf{E} - \mathbf{E}_\parallel\)</span>, diperoleh <strong>Bentuk Vektorial Umum</strong>:</p>
+<p>Dengan mensubstitusikan <span class="math inline">\(\mathbf{E}_\parallel = \frac{(\boldsymbol{\beta}\cdot\mathbf{E})}{\beta^2}\boldsymbol{\beta}\)</span>, <span class="math inline">\(\mathbf{E}_\perp = \mathbf{E} - \mathbf{E}_\parallel\)</span>, serta identitas <span class="math inline">\(1 - \gamma = -\frac{\gamma^2 \beta^2}{\gamma + 1}\)</span>, diperoleh <strong>Bentuk Vektorial Umum</strong>:</p>
 <p><span class="math display">\[\begin{aligned}
-\mathbf{E}' &amp;= \gamma(\mathbf{E} + \boldsymbol{\beta} \times \mathbf{B}) - \frac{\gamma^2}{\gamma+1}\boldsymbol{\beta}(\boldsymbol{\beta} \cdot \mathbf{E}) \\
-\mathbf{B}' &amp;= \gamma(\mathbf{B} - \boldsymbol{\beta} \times \mathbf{E}) - \frac{\gamma^2}{\gamma+1}\boldsymbol{\beta}(\boldsymbol{\beta} \cdot \mathbf{B})
+\mathbf{E}' &amp;= \mathbf{E}'_\parallel + \mathbf{E}'_\perp = \gamma(\mathbf{E} + \boldsymbol{\beta} \times \mathbf{B}) - \frac{\gamma^2}{\gamma+1}\boldsymbol{\beta}(\boldsymbol{\beta} \cdot \mathbf{E}) \\
+\mathbf{B}' &amp;= \mathbf{B}'_\parallel + \mathbf{B}'_\perp = \gamma(\mathbf{B} - \boldsymbol{\beta} \times \mathbf{E}) - \frac{\gamma^2}{\gamma+1}\boldsymbol{\beta}(\boldsymbol{\beta} \cdot \mathbf{B})
 \end{aligned}\]</span></p>
 </div>
 <div class="fragment">
 <div class="box-red">
-<p><strong>Kesimpulan Utama:</strong> Medan listrik murni (<span class="math inline">\(\mathbf{B}=0\)</span>) di satu kerangka akan teramati sebagai campuran <span class="math inline">\(\mathbf{E}'\)</span> dan <span class="math inline">\(\mathbf{B}'\)</span> di kerangka lain!</p>
+<p><strong>Implikasi Fisis Utama:</strong> Medan listrik murni (<span class="math inline">\(\mathbf{B}=0\)</span>) pada satu kerangka acuan inersial akan teramati sebagai superposisi medan listrik <span class="math inline">\(\mathbf{E}'\)</span> dan medan magnetik <span class="math inline">\(\mathbf{B}'\)</span> pada kerangka acuan inersial lainnya!</p>
 </div>
 </div>
 </section>
 <section id="aplikasi-1-medan-muatan-titik-relativistik" class="slide level2 center">
 <h2>8. Aplikasi 1: Medan Muatan Titik Relativistik</h2>
-<p>Muatan titik <span class="math inline">\(q\)</span> diam di kerangka <span class="math inline">\(K'\)</span> (<span class="math inline">\(\mathbf{E}' = \frac{q\mathbf{r}'}{r'^3}, \; \mathbf{B}' = 0\)</span>) bergerak dengan kecepatan <span class="math inline">\(v\)</span> melewati pengamat di <span class="math inline">\(K\)</span> pada jarak impak <span class="math inline">\(b\)</span> (<span class="math inline">\(x'_1 = -\gamma v t, \; x'_2 = b, \; x'_3 = 0\)</span>):</p>
+<p>Muatan titik <span class="math inline">\(q\)</span> diam di kerangka <span class="math inline">\(K'\)</span> (<span class="math inline">\(\mathbf{E}' = \frac{q\mathbf{r}'}{r'^3}, \; \mathbf{B}' = 0\)</span>) bergerak dengan kecepatan <span class="math inline">\(v\)</span> sepanjang sumbu-<span class="math inline">\(x_1\)</span> melewati pengamat di <span class="math inline">\(K\)</span> pada parameter dampak (<em>impact parameter</em>) <span class="math inline">\(b\)</span> (<span class="math inline">\(x'_1 = -\gamma v t, \; x'_2 = b, \; x'_3 = 0\)</span>):</p>
 <div class="columns">
 <div class="column" style="width:50%;">
 <div class="fragment">
@@ -527,44 +544,45 @@ B_3 &amp;= \gamma \beta E'_2 = \beta E_2
 </div>
 </div><div class="column" style="width:50%;">
 <div class="fragment">
-<p><strong>Distribusi Spasial (Bentuk <em>Whiskbroom</em>):</strong></p>
+<p><strong>Distribusi Spasial (<em>Whiskbroom</em>):</strong></p>
+<p>Pada <span class="math inline">\(t=0\)</span>, dengan <span class="math inline">\(x'_1 = \gamma r \cos\psi\)</span> dan <span class="math inline">\(x'_\perp = r \sin\psi\)</span>, diperoleh <span class="math inline">\(r' = \gamma r \sqrt{1 - \beta^2 \sin^2\psi}\)</span>, sehingga:</p>
 <p><span class="math display">\[\mathbf{E}(\mathbf{r}, \psi) = \frac{q \mathbf{r}}{r^3 \gamma^2 (1 - \beta^2 \sin^2 \psi)^{3/2}}\]</span></p>
-<p><em>(dengan <span class="math inline">\(\psi\)</span> sudut antara <span class="math inline">\(\mathbf{v}\)</span> dan <span class="math inline">\(\mathbf{r}\)</span>)</em></p>
+<p><em>(dengan <span class="math inline">\(\psi\)</span> menyatakan sudut antara <span class="math inline">\(\mathbf{v}\)</span> dan <span class="math inline">\(\mathbf{r}\)</span>)</em></p>
 </div>
 </div></div>
 <ul>
-<li class="fragment"><strong>Kompresi Transversal (<span class="math inline">\(\psi = \pi/2\)</span>):</strong> Medan listrik menguat sebesar faktor <span class="math inline">\(\gamma\)</span>, sementara durasi impuls menyempit <span class="math inline">\(\Delta t \sim \frac{b}{\gamma v}\)</span>.</li>
-<li class="fragment"><strong>Limit Ultrarelativistik (<span class="math inline">\(\beta \to 1\)</span>):</strong> Medan terkompresi di bidang tegak lurus gerak, menyerupai pulsa radiasi gelombang datar terpolarisasi (<em>Metode Virtual Quanta Weizsäcker-Williams</em>).</li>
+<li class="fragment"><strong>Kompresi Transversal (<span class="math inline">\(\psi = \pi/2\)</span>):</strong> Intensitas medan listrik menguat sebesar faktor <span class="math inline">\(\gamma\)</span>, sedangkan lebar durasi pulsa menyempit menjadi <span class="math inline">\(\Delta t \sim \frac{b}{\gamma v}\)</span>.</li>
+<li class="fragment"><strong>Limit Ultrarelativistik (<span class="math inline">\(\beta \to 1\)</span>):</strong> Garis medan terkompresi tajam pada bidang tegak lurus arah gerak, menyerupai pulsa radiasi gelombang datar terpolarisasi (<em>Metode Kuanta Virtual Weizsäcker–Williams</em>).</li>
 </ul>
 </section>
 <section id="aplikasi-2-presesi-thomas-persamaan-bmt" class="slide level2 center">
 <h2>9. Aplikasi 2: Presesi Thomas &amp; Persamaan BMT</h2>
 <div class="fragment">
 <div class="box-amber">
-<p><strong>Presesi Thomas (<span class="math inline">\(\boldsymbol{\omega}_T\)</span>):</strong> Dua Lorentz Boost berturut-turut pada arah berbeda tidak komutatif (<span class="math inline">\([K_i, K_j] = -\epsilon_{ijk}S_k\)</span>), sehingga muncul rotasi kinematik murni:</p>
+<p><strong>Presesi Thomas (<span class="math inline">\(\boldsymbol{\omega}_T\)</span>):</strong> Dua <em>Lorentz boost</em> berturut-turut pada arah yang tidak kolinear tidak bersifat komutatif (<span class="math inline">\([K_i, K_j] = -\epsilon_{ijk}S_k\)</span>), sehingga memunculkan rotasi kinematik murni (<em>Rotasi Wigner</em>) dengan laju sudut:</p>
 <p><span class="math display">\[\boldsymbol{\omega}_T = \frac{\gamma^2}{\gamma+1} \frac{\mathbf{a} \times \mathbf{v}}{c^2} \approx \frac{1}{2c^2} (\mathbf{a} \times \mathbf{v})\]</span></p>
-<p>Mengoreksi energi interaksi spin-orbit atom hidrogen sebesar <strong>faktor <span class="math inline">\(\frac{1}{2}\)</span> (Faktor Thomas)</strong>.</p>
+<p>Efek kinematik ini mengoreksi energi interaksi <em>spin–orbit</em> pada atom hidrogen tepat sebesar <strong>faktor <span class="math inline">\(\frac{1}{2}\)</span></strong> (<em>Faktor Thomas</em>).</p>
 </div>
 </div>
 <div class="fragment">
-<p><strong>Persamaan Bargmann–Michel–Telegdi (BMT) untuk Spin 4-Vektor (<span class="math inline">\(S^\alpha\)</span>):</strong></p>
-<p>Dengan syarat ortogonalitas di kerangka diam partikel (<span class="math inline">\(S^\alpha U_\alpha = 0\)</span>):</p>
+<p><strong>Persamaan Bargmann–Michel–Telegdi (BMT) untuk 4-Vektor Spin (<span class="math inline">\(S^\alpha\)</span>):</strong></p>
+<p>Dengan syarat ortogonalitas di kerangka diam partikel (<span class="math inline">\(S^\alpha U_\alpha = 0 \implies \frac{dS^\alpha}{d\tau}U_\alpha = -S^\alpha\frac{dU_\alpha}{d\tau}\)</span>), evolusi relativistik spin dalam medan elektromagnetik homogen memenuhi:</p>
 <p><span class="math display">\[\frac{dS^\alpha}{d\tau} = \frac{e}{mc} \left[ \frac{g}{2} F^{\alpha\beta} S_\beta + \frac{1}{c^2} \left(\frac{g}{2} - 1\right) U^\alpha \left(S_\lambda F^{\lambda\mu} U_\mu\right) \right]\]</span></p>
-<p><em>(Suku kedua mendeskripsikan presesi anomali <span class="math inline">\(g-2\)</span> yang menjadi dasar eksperimen presisi momen magnetik muon/elektron).</em></p>
+<p><em>(Suku kedua sebanding dengan anomali momen magnetik <span class="math inline">\(a = \frac{g-2}{2}\)</span> yang menjadi landasan teoretis eksperimen presisi <span class="math inline">\(g-2\)</span> muon dan elektron).</em></p>
 </div>
 </section>
-<section id="ringkasan-invarian-lorentz-medan-em" class="slide level2 center">
-<h2>10. Ringkasan Invarian Lorentz Medan EM</h2>
-<p>Meskipun komponen <span class="math inline">\(\mathbf{E}\)</span> dan <span class="math inline">\(\mathbf{B}\)</span> berubah antar kerangka inersia, dua kontraksi skalar berikut bernilai <strong>mutlak sama</strong> di semua kerangka acuan:</p>
+<section id="invarian-lorentz-medan-elektromagnetik" class="slide level2 center">
+<h2>10. Invarian Lorentz Medan Elektromagnetik</h2>
+<p>Meskipun komponen <span class="math inline">\(\mathbf{E}\)</span> dan <span class="math inline">\(\mathbf{B}\)</span> berubah antarkerangka acuan inersial, kontraksi penuh tensor <span class="math inline">\(F^{\alpha\beta}\)</span> dan dualnya <span class="math inline">\(\tilde{F}^{\alpha\beta}\)</span> menghasilkan dua besaran skalar yang <strong>mutlak invarian</strong>:</p>
 <div class="columns">
 <div class="column" style="width:50%;">
 <div class="fragment">
 <div class="box-blue">
-<p><strong>1. Invarian Skalar:</strong></p>
-<p><span class="math display">\[F_{\alpha\beta} F^{\alpha\beta} = 2(\mathbf{B}^2 - \mathbf{E}^2) = \text{invarian}\]</span></p>
+<p><strong>1. Invarian Skalar Sejati:</strong></p>
+<p><span class="math display">\[F_{\alpha\beta} F^{\alpha\beta} = 2F_{0i}F^{0i} + F_{ij}F^{ij} = 2(\mathbf{B}^2 - \mathbf{E}^2)\]</span></p>
 <ul>
-<li>Medan dominan listrik (<span class="math inline">\(|\mathbf{E}| &gt; |\mathbf{B}|\)</span>) tetap dominan listrik di kerangka mana pun.</li>
-<li>Untuk gelombang elektromagnetik di vakum (<span class="math inline">\(|\mathbf{E}| = |\mathbf{B}|\)</span>), nilainya selalu <span class="math inline">\(0\)</span>.</li>
+<li>Medan dominan listrik (<span class="math inline">\(|\mathbf{E}| &gt; |\mathbf{B}|\)</span>) tetap dominan listrik di seluruh kerangka inersial.</li>
+<li>Untuk gelombang elektromagnetik di ruang hampa (<span class="math inline">\(|\mathbf{E}| = |\mathbf{B}|\)</span>), invarian ini selalu bernilai <span class="math inline">\(0\)</span>.</li>
 </ul>
 </div>
 </div>
@@ -572,10 +590,10 @@ B_3 &amp;= \gamma \beta E'_2 = \beta E_2
 <div class="fragment">
 <div class="box-green">
 <p><strong>2. Invarian Pseudoskalar:</strong></p>
-<p><span class="math display">\[F_{\alpha\beta} \tilde{F}^{\alpha\beta} = -4(\mathbf{E} \cdot \mathbf{B}) = \text{invarian}\]</span></p>
+<p><span class="math display">\[F_{\alpha\beta} \tilde{F}^{\alpha\beta} = 2F_{0i}\tilde{F}^{0i} + F_{ij}\tilde{F}^{ij} = -4(\mathbf{E} \cdot \mathbf{B})\]</span></p>
 <ul>
-<li>Jika <span class="math inline">\(\mathbf{E} \perp \mathbf{B}\)</span> di satu kerangka, keduanya selalu tegak lurus di semua kerangka acuan.</li>
-<li>Jika <span class="math inline">\(\mathbf{E}\cdot\mathbf{B} = 0\)</span> dan <span class="math inline">\(|\mathbf{E}| \neq |\mathbf{B}|\)</span>, selalu ada kerangka di mana medan murni listrik atau murni magnet.</li>
+<li>Apabila <span class="math inline">\(\mathbf{E} \perp \mathbf{B}\)</span> di satu kerangka, sifat ortogonalitas tersebut berlaku di semua kerangka acuan.</li>
+<li>Apabila <span class="math inline">\(\mathbf{E}\cdot\mathbf{B} = 0\)</span> dan <span class="math inline">\(|\mathbf{E}| \neq |\mathbf{B}|\)</span>, selalu terdapat kerangka inersial di mana medan teramati murni listrik atau murni magnetik.</li>
 </ul>
 </div>
 </div>
@@ -618,7 +636,7 @@ B_3 &amp;= \gamma \beta E'_2 = \beta E_2
 'autoAnimateDuration': 1,
 'autoAnimateUnmatched': true,
 'jumpToSlide': true,
-'menu': {"side":"left","useTextContentForMissingTitles":true,"markers":false,"loadIcons":false,"custom":[{"title":"Tools","icon":"<i class=\"fas fa-gear\"></i>","content":"<ul class=\"slide-menu-items\">\n<li class=\"slide-tool-item active\" data-item=\"0\"><a href=\"#\" onclick=\"RevealMenuToolHandlers.fullscreen(event)\"><kbd>f</kbd> Fullscreen</a></li>\n<li class=\"slide-tool-item\" data-item=\"1\"><a href=\"#\" onclick=\"RevealMenuToolHandlers.speakerMode(event)\"><kbd>s</kbd> Speaker View</a></li>\n<li class=\"slide-tool-item\" data-item=\"2\"><a href=\"#\" onclick=\"RevealMenuToolHandlers.overview(event)\"><kbd>o</kbd> Slide Overview</a></li>\n<li class=\"slide-tool-item\" data-item=\"3\"><a href=\"#\" onclick=\"RevealMenuToolHandlers.togglePdfExport(event)\"><kbd>e</kbd> PDF Export Mode</a></li>\n<li class=\"slide-tool-item\" data-item=\"4\"><a href=\"#\" onclick=\"RevealMenuToolHandlers.toggleScrollView(event)\"><kbd>r</kbd> Scroll View Mode</a></li>\n<li class=\"slide-tool-item\" data-item=\"5\"><a href=\"#\" onclick=\"RevealMenuToolHandlers.toggleChalkboard(event)\"><kbd>b</kbd> Toggle Chalkboard</a></li>\n<li class=\"slide-tool-item\" data-item=\"6\"><a href=\"#\" onclick=\"RevealMenuToolHandlers.toggleNotesCanvas(event)\"><kbd>c</kbd> Toggle Notes Canvas</a></li>\n<li class=\"slide-tool-item\" data-item=\"7\"><a href=\"#\" onclick=\"RevealMenuToolHandlers.downloadDrawings(event)\"><kbd>d</kbd> Download Drawings</a></li>\n<li class=\"slide-tool-item\" data-item=\"8\"><a href=\"#\" onclick=\"RevealMenuToolHandlers.keyboardHelp(event)\"><kbd>?</kbd> Keyboard Help</a></li>\n</ul>"}],"openButton":true},
+'menu': {"side":"left","useTextContentForMissingTitles":true,"markers":false,"loadIcons":false,"custom":[{"title":"Tools","icon":"\u003ci class=\"fas fa-gear\">\u003c/i>","content":"\u003cul class=\"slide-menu-items\">\n\u003cli class=\"slide-tool-item active\" data-item=\"0\">\u003ca href=\"#\" onclick=\"RevealMenuToolHandlers.fullscreen(event)\">\u003ckbd>f\u003c/kbd> Fullscreen\u003c/a>\u003c/li>\n\u003cli class=\"slide-tool-item\" data-item=\"1\">\u003ca href=\"#\" onclick=\"RevealMenuToolHandlers.speakerMode(event)\">\u003ckbd>s\u003c/kbd> Speaker View\u003c/a>\u003c/li>\n\u003cli class=\"slide-tool-item\" data-item=\"2\">\u003ca href=\"#\" onclick=\"RevealMenuToolHandlers.overview(event)\">\u003ckbd>o\u003c/kbd> Slide Overview\u003c/a>\u003c/li>\n\u003cli class=\"slide-tool-item\" data-item=\"3\">\u003ca href=\"#\" onclick=\"RevealMenuToolHandlers.togglePdfExport(event)\">\u003ckbd>e\u003c/kbd> PDF Export Mode\u003c/a>\u003c/li>\n\u003cli class=\"slide-tool-item\" data-item=\"4\">\u003ca href=\"#\" onclick=\"RevealMenuToolHandlers.toggleScrollView(event)\">\u003ckbd>r\u003c/kbd> Scroll View Mode\u003c/a>\u003c/li>\n\u003cli class=\"slide-tool-item\" data-item=\"5\">\u003ca href=\"#\" onclick=\"RevealMenuToolHandlers.toggleChalkboard(event)\">\u003ckbd>b\u003c/kbd> Toggle Chalkboard\u003c/a>\u003c/li>\n\u003cli class=\"slide-tool-item\" data-item=\"6\">\u003ca href=\"#\" onclick=\"RevealMenuToolHandlers.toggleNotesCanvas(event)\">\u003ckbd>c\u003c/kbd> Toggle Notes Canvas\u003c/a>\u003c/li>\n\u003cli class=\"slide-tool-item\" data-item=\"7\">\u003ca href=\"#\" onclick=\"RevealMenuToolHandlers.downloadDrawings(event)\">\u003ckbd>d\u003c/kbd> Download Drawings\u003c/a>\u003c/li>\n\u003cli class=\"slide-tool-item\" data-item=\"8\">\u003ca href=\"#\" onclick=\"RevealMenuToolHandlers.keyboardHelp(event)\">\u003ckbd>?\u003c/kbd> Keyboard Help\u003c/a>\u003c/li>\n\u003c/ul>"}],"openButton":true,"openButtonLabel":"Slide menu"},
 'chalkboard': {"buttons":true},
 'smaller': false,
  
@@ -773,7 +791,7 @@ B_3 &amp;= \gamma \beta E'_2 = \beta E_2
         margin: 4.0e-2,
 
         math: {
-          mathjax: 'https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml-full.js',
+          mathjax: 'https://cdn.jsdelivr.net/npm/mathjax@4/tex-chtml.js',
           config: 'TeX-AMS_HTML-full',
           tex2jax: {
             inlineMath: [['\\(','\\)']],
@@ -874,7 +892,8 @@ B_3 &amp;= \gamma \beta E'_2 = \beta E_2
               return filterRegex.test(href) || localhostRegex.test(href) || mailtoRegex.test(href);
           }
           // Inspect non-navigation links and adorn them if external
-         var links = window.document.querySelectorAll('a[href]:not(.nav-link):not(.navbar-brand):not(.toc-action):not(.sidebar-link):not(.sidebar-item-toggle):not(.pagination-link):not(.no-external):not([aria-hidden]):not(.dropdown-item):not(.quarto-navigation-tool):not(.about-link)');
+          window.quartoDecorateExternalLinks = function (root) {
+         var links = (root || window.document).querySelectorAll('a[href]:not(.nav-link):not(.navbar-brand):not(.toc-action):not(.sidebar-link):not(.sidebar-item-toggle):not(.pagination-link):not(.no-external):not([aria-hidden]):not(.dropdown-item):not(.quarto-navigation-tool):not(.about-link)');
           for (var i=0; i<links.length; i++) {
             const link = links[i];
             if (!isInternal(link.href)) {
@@ -883,8 +902,69 @@ B_3 &amp;= \gamma \beta E'_2 = \beta E_2
               if (link.dataset.originalHref !== undefined) {
                 link.href = link.dataset.originalHref;
               }
+              if (!link.classList.contains('no-external-icon')) {
+              }
             }
           }
+          };
+          window.quartoDecorateExternalLinks(window.document);
+        // Esc closes the popup (WCAG 1.4.13) and focus leaving both trigger and
+        // popup closes it (WCAG 2.4.11); tippy handles neither for interactive popups.
+        const hideOnEscAndFocusOut = {
+          name: 'hideOnEscAndFocusOut',
+          defaultValue: true,
+          fn(instance) {
+            const dismiss = () => {
+              // A show scheduled by the trigger delay would otherwise reopen it
+              instance.clearDelayTimeouts();
+              instance.hide();
+            };
+            const onKeyDown = (event) => {
+              if (event.key !== 'Escape') {
+                return;
+              }
+              // Keep Esc from also reaching page handlers (e.g. reveal.js overview),
+              // except an open reveal.js slide menu, which Esc should close too.
+              // The menu handles keys only when its keyboard option is on.
+              const menuHandlesEsc = window.Reveal?.getPlugin?.('menu')?.isOpen() &&
+                window.Reveal.getConfig().menu?.keyboard !== false;
+              if (!menuHandlesEsc) {
+                event.stopPropagation();
+              }
+              if (instance.popper.contains(window.document.activeElement)) {
+                // Disabled while refocusing so the focus trigger does not reopen it
+                instance.disable();
+                instance.reference.focus();
+                instance.enable();
+              }
+              dismiss();
+            };
+            const onFocusOut = (event) => {
+              const target = event.relatedTarget;
+              if (target && !instance.reference.contains(target) &&
+                  !instance.popper.contains(target)) {
+                dismiss();
+              }
+            };
+            // On the trigger too: a click trigger (code-annotations: select) has no
+            // blur handling. Attached for the instance's lifetime so leaving the
+            // trigger also cancels a show still pending on the trigger delay.
+            instance.reference.addEventListener('focusout', onFocusOut);
+            return {
+              onShow() {
+                window.document.addEventListener('keydown', onKeyDown, true);
+                instance.popper.addEventListener('focusout', onFocusOut);
+              },
+              onHide() {
+                window.document.removeEventListener('keydown', onKeyDown, true);
+                instance.popper.removeEventListener('focusout', onFocusOut);
+              },
+              onDestroy() {
+                instance.reference.removeEventListener('focusout', onFocusOut);
+              },
+            };
+          },
+        };
         function tippyHover(el, contentFn, onTriggerFn, onUntriggerFn) {
           const config = {
             allowHTML: true,
@@ -898,6 +978,7 @@ B_3 &amp;= \gamma \beta E'_2 = \beta E_2
             interactiveBorder: 10,
             theme: 'light-border',
             placement: 'bottom-start',
+            plugins: [hideOnEscAndFocusOut],
           };
           if (contentFn) {
             config.content = contentFn;
